@@ -120,10 +120,11 @@ ul {
   text-decoration: none;
 }
 
-.brand-mark {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: 1.4rem;
+.brand-logo {
+  height: 2.1rem;
+  width: auto;
+  display: block;
+  margin-bottom: 0.2rem;
 }
 
 .brand-caption {
@@ -613,11 +614,11 @@ ul {
   border-bottom: 1px solid rgba(244, 239, 225, 0.2);
 }
 
-.footer-brand {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: 1.15rem;
-  margin-bottom: 0.5rem;
+.footer-logo {
+  height: 1.9rem;
+  width: auto;
+  display: block;
+  margin-bottom: 0.75rem;
 }
 
 .footer-colophon {

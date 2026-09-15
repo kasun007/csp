@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSP Logo — Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #2a2823; --ivory: #f4efe1; --surface: #ece4d3;
+      --green: #33493b; --bronze: #9c7a4e; --muted: #6b665c; --border: #ddd3bc;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Work Sans", sans-serif; background: var(--ivory); color: var(--ink); line-height: 1.6; }
+    .wrap { max-width: 64rem; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+    h1 { font-family: "Literata", serif; font-size: 2rem; margin: 0 0 0.25rem; }
+    .intro { color: var(--muted); max-width: 42rem; margin: 0 0 3rem; }
+    h2 { font-family: "Literata", serif; font-size: 1.25rem; margin: 3rem 0 0.5rem; border-top: 1px solid var(--border); padding-top: 2rem; }
+    .note { color: var(--muted); font-size: 0.9rem; max-width: 40rem; margin: 0 0 1.5rem; }
+    .row { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
+    .swatch { border: 1px solid var(--border); border-radius: 4px; padding: 2rem; display: flex; align-items: center; justify-content: center; }
+    .swatch.light { background: var(--ivory); }
+    .swatch.surface { background: var(--surface); }
+    .swatch.dark { background: var(--ink); }
+    .swatch.white { background: #ffffff; }
+    .swatch.black { background: #000000; }
+    .mark { width: 180px; height: auto; }
+    .mark.small { width: 90px; }
+    .roundel { width: 140px; height: auto; }
+    .favicon-32 { width: 32px; height: 32px; }
+    .favicon-16 { width: 16px; height: 16px; }
+    .favicon-row { display: flex; align-items: center; gap: 2rem; }
+    .favicon-row .swatch { padding: 1rem; }
+    .lockup-h { display: flex; align-items: center; gap: 1.25rem; }
+    .lockup-h .mark { width: 90px; }
+    .wordmark { font-family: "Literata", serif; font-weight: 500; font-size: 1.6rem; letter-spacing: 0.01em; }
+    .wordmark small { display: block; font-family: "Work Sans", sans-serif; font-weight: 500; font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); margin-top: 0.2rem; }
+    .lockup-stack { text-align: center; }
+    .lockup-stack .mark { width: 100px; margin: 0 auto 1rem; }
+    .lockup-stack .wordmark { font-size: 1.2rem; line-height: 1.3; }
+    .caption { font-size: 0.85rem; color: var(--muted); margin-top: 0.75rem; text-align: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 40rem) { .grid-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>CSP — Logo Review</h1>
+    <p class="intro">C and P — Colombo, Philosophy — stand upright and solid, bookending the mark. S — School, the connective middle term — sits smaller, raised, and italic, like a note offered mid-conversation. The gently curved rule beneath ties the three into one form: an open, unhurried line standing in for an open book, a horizon, or a considered conclusion — nothing literal, nothing spelled out.</p>
+
+    <h2>Primary mark</h2>
+    <p class="note">Built from the site's own Literata typeface rather than hand-drawn shapes, so it renders identically wherever that font is available. For print or handoff to a printer, convert the text to outlines first so it doesn't depend on the font being installed.</p>
+    <div class="row">
+      <div class="swatch light"><img class="mark" src="logo-mark.svg" alt="CSP monogram on ivory"></div>
+      <div class="swatch surface"><img class="mark" src="logo-mark.svg" alt="CSP monogram on stone surface"></div>
+      <div class="swatch dark">
+        <svg class="mark" viewBox="0 0 260 210" role="img" aria-label="CSP monogram on charcoal">
+          <text x="15" y="165" font-family="Literata, Georgia, serif" font-weight="600" font-size="130" fill="#f4efe1">C</text>
+          <text x="108" y="100" font-family="Literata, Georgia, serif" font-style="italic" font-weight="500" font-size="68" fill="#9c7a4e">S</text>
+          <text x="148" y="165" font-family="Literata, Georgia, serif" font-weight="600" font-size="130" fill="#f4efe1">P</text>
+          <path d="M 20 186 Q 132 178 244 186" fill="none" stroke="#9c7a4e" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <h2>Black &amp; white test</h2>
+    <p class="note">The brief requires the mark to hold up with no color at all — same file, <code>currentColor</code> only.</p>
+    <div class="row">
+      <div class="swatch white"><img class="mark" style="color:#000" src="logo-mark-mono.svg" alt="CSP monogram, black on white"></div>
+      <div class="swatch black"><img class="mark" style="color:#fff" src="logo-mark-mono.svg" alt="CSP monogram, white on black"></div>
+    </div>
+
+    <h2>Roundel / seal</h2>
+    <p class="note">For social profile photos, certificates, embossed signage, and stamps — anywhere a contained, circular mark reads better than the loose horizontal one.</p>
+    <div class="row">
+      <div class="swatch light"><img class="roundel" src="logo-roundel.svg" alt="CSP seal on ivory"></div>
+      <div class="swatch surface"><img class="roundel" src="logo-roundel.svg" alt="CSP seal on stone surface"></div>
+    </div>
+
+    <h2>Favicon (16–32px)</h2>
+    <p class="note">At true favicon size the three-letter mark blurs into mush, so this is a deliberate, scale-specific simplification — not a competing logo. Bold "P" in Work Sans, not Literata, because sans-serif holds up better this small.</p>
+    <div class="favicon-row">
+      <div class="swatch light"><img class="favicon-32" src="logo-favicon.svg" alt="CSP favicon, 32px"></div>
+      <div class="swatch light"><img class="favicon-16" src="logo-favicon.svg" alt="CSP favicon, 16px"></div>
+    </div>
+
+    <h2>Horizontal lockup</h2>
+    <p class="note">For website headers, letterhead, and wide signage.</p>
+    <div class="grid-2">
+      <div class="swatch light">
+        <div class="lockup-h">
+          <img class="mark" src="logo-mark.svg" alt="CSP mark">
+          <div class="wordmark">Colombo School<br>of Philosophy</div>
+        </div>
+      </div>
+      <div class="swatch dark">
+        <div class="lockup-h">
+          <svg class="mark" viewBox="0 0 260 210" role="img" aria-label="CSP monogram">
+            <text x="15" y="165" font-family="Literata, Georgia, serif" font-weight="600" font-size="130" fill="#f4efe1">C</text>
+            <text x="108" y="100" font-family="Literata, Georgia, serif" font-style="italic" font-weight="500" font-size="68" fill="#9c7a4e">S</text>
+            <text x="148" y="165" font-family="Literata, Georgia, serif" font-weight="600" font-size="130" fill="#f4efe1">P</text>
+            <path d="M 20 186 Q 132 178 244 186" fill="none" stroke="#9c7a4e" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <div class="wordmark" style="color:#f4efe1;">Colombo School<br>of Philosophy</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Stacked lockup</h2>
+    <p class="note">For social avatars, certificates, and narrow spaces (mobile header, business card).</p>
+    <div class="row">
+      <div class="swatch light" style="width:220px;">
+        <div class="lockup-stack">
+          <img class="mark" src="logo-mark.svg" alt="CSP mark">
+          <div class="wordmark">Colombo School<br>of Philosophy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

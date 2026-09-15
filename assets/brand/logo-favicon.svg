@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="CSP">
+  <!--
+    Simplified mark for 16–32px contexts (browser favicon, tiny app
+    icons) where the full three-letter monogram would blur into mush.
+    Bold sans (Work Sans) holds up better than serif detail at this
+    size — a deliberate, scale-specific simplification, not a
+    replacement for the primary mark used everywhere else.
+  -->
+  <circle cx="100" cy="100" r="96" fill="#33493B"/>
+  <text x="100" y="142" text-anchor="middle" font-family="'Work Sans', Arial, sans-serif" font-weight="700" font-size="130" fill="#F4EFE1">P</text>
+</svg>

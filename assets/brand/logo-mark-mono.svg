@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 210" role="img" aria-label="CSP monogram, Colombo School of Philosophy">
+  <!-- Single-color variant — proves the mark holds up in pure black and white (or any one ink color via currentColor). -->
+  <text x="15" y="165" font-family="Literata, Georgia, serif" font-weight="600" font-size="130" fill="currentColor">C</text>
+  <text x="108" y="100" font-family="Literata, Georgia, serif" font-style="italic" font-weight="500" font-size="68" fill="currentColor">S</text>
+  <text x="148" y="165" font-family="Literata, Georgia, serif" font-weight="600" font-size="130" fill="currentColor">P</text>
+  <path d="M 20 186 Q 132 178 244 186" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+</svg>

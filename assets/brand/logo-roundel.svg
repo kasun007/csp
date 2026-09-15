@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="CSP seal, Colombo School of Philosophy">
+  <!-- Roundel / seal version — for social avatars, certificates, embossed signage, stamps. -->
+  <circle cx="150" cy="150" r="140" fill="none" stroke="#33493B" stroke-width="3"/>
+  <g transform="translate(39.5,60.75) scale(0.85)">
+    <text x="15" y="165" font-family="Literata, Georgia, serif" font-weight="600" font-size="130" fill="#33493B">C</text>
+    <text x="108" y="100" font-family="Literata, Georgia, serif" font-style="italic" font-weight="500" font-size="68" fill="#9C7A4E">S</text>
+    <text x="148" y="165" font-family="Literata, Georgia, serif" font-weight="600" font-size="130" fill="#33493B">P</text>
+    <path d="M 20 186 Q 132 178 244 186" fill="none" stroke="#9C7A4E" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>
