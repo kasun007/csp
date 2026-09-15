@@ -1,0 +1,110 @@
+[
+  {
+    "slug": "introduction-to-philosophy",
+    "category": "introduction",
+    "categoryLabel": "Introduction",
+    "title": "Introduction to Philosophy",
+    "summary": "Big questions, clear thinking.",
+    "duration": "8 weeks",
+    "format": "Online",
+    "startDate": "6 October 2026",
+    "startTime": "Mondays, 6:00 PM",
+    "location": "CSP Learning Center, 45 Ward Place, Colombo 07",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=CSP+Learning+Center%2C+45+Ward+Place%2C+Colombo+07",
+    "description": [
+      "This course is where most people start: a guided tour through the biggest questions philosophy asks, and the different ways thinkers have tried to answer them.",
+      "Across eight weeks, we cover knowledge, ethics, mind, and meaning — not as separate boxes, but as questions that connect to how you actually think and live. No prior background is expected.",
+      "Each week pairs a short reading with a live discussion, so you're not just absorbing ideas but testing them against other people's thinking."
+    ]
+  },
+  {
+    "slug": "ethics-in-the-modern-world",
+    "category": "ethics",
+    "categoryLabel": "Ethics",
+    "title": "Ethics in the Modern World",
+    "summary": "Ancient wisdom, modern life.",
+    "duration": "6 weeks",
+    "format": "Online",
+    "startDate": "7 October 2026",
+    "startTime": "Tuesdays, 6:30 PM",
+    "location": "CSP Learning Center, 45 Ward Place, Colombo 07",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=CSP+Learning+Center%2C+45+Ward+Place%2C+Colombo+07",
+    "description": [
+      "What do we owe each other? This course works through the major ethical frameworks — consequences, duty, character, care — and applies them to problems people actually face today.",
+      "Expect case studies drawn from everyday life in Sri Lanka and beyond: fairness at work, family obligation, and the small decisions that add up to a life.",
+      "By the end, you won't have one tidy answer to \"what's right\" — but you'll have sharper tools for working it out."
+    ]
+  },
+  {
+    "slug": "political-philosophy",
+    "category": "political-philosophy",
+    "categoryLabel": "Political Philosophy",
+    "title": "Political Philosophy",
+    "summary": "Power, justice, and society.",
+    "duration": "8 weeks",
+    "format": "Online",
+    "startDate": "8 October 2026",
+    "startTime": "Wednesdays, 6:00 PM",
+    "location": "Colombo Public Library Hall, Colombo 07",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Colombo+Public+Library%2C+Colombo+07",
+    "description": [
+      "Why do we accept some authority as legitimate and reject other kinds? This course traces the major arguments about the state, justice, and collective life.",
+      "We read across traditions — not just the usual Western canon — and connect the arguments to real questions about governance, rights, and civic life in Sri Lanka today.",
+      "No political affiliation assumed or required. The goal is to think more carefully, not to arrive at a party line."
+    ]
+  },
+  {
+    "slug": "philosophy-of-mind",
+    "category": "philosophy-of-mind",
+    "categoryLabel": "Philosophy of Mind",
+    "title": "Philosophy of Mind",
+    "summary": "Consciousness, identity, reality.",
+    "duration": "8 weeks",
+    "format": "Online",
+    "startDate": "9 October 2026",
+    "startTime": "Thursdays, 6:30 PM",
+    "location": "CSP Learning Center, 45 Ward Place, Colombo 07",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=CSP+Learning+Center%2C+45+Ward+Place%2C+Colombo+07",
+    "description": [
+      "Is the mind the same thing as the brain? What makes you the same person you were ten years ago? This course takes on the oldest and strangest questions in philosophy.",
+      "We'll draw on both classic philosophical arguments and current findings from cognitive science, without assuming a science background.",
+      "Fair warning: several sessions in, most students start finding this course's questions hard to stop thinking about."
+    ]
+  },
+  {
+    "slug": "logic-and-critical-thinking",
+    "category": "logic",
+    "categoryLabel": "Logic",
+    "title": "Logic and Critical Thinking",
+    "summary": "Think clearly, argue better.",
+    "duration": "6 weeks",
+    "format": "Online",
+    "startDate": "10 October 2026",
+    "startTime": "Fridays, 5:30 PM",
+    "location": "Colombo Public Library Hall, Colombo 07",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Colombo+Public+Library%2C+Colombo+07",
+    "description": [
+      "A practical course: how to spot a bad argument, build a good one, and tell the difference under pressure.",
+      "We cover the basics of formal and informal logic, common fallacies, and how bias quietly shapes reasoning — including our own.",
+      "Useful well beyond philosophy: for work, debate, and the everyday task of deciding what to believe."
+    ]
+  },
+  {
+    "slug": "philosophy-in-everyday-life",
+    "category": "everyday-life",
+    "categoryLabel": "Everyday Life",
+    "title": "Philosophy in Everyday Life",
+    "summary": "Ideas for a more meaningful life.",
+    "duration": "4 weeks",
+    "format": "Online",
+    "startDate": "11 October 2026",
+    "startTime": "Saturdays, 10:00 AM",
+    "location": "CSP Community Room, Barnes Place, Colombo 07",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Barnes+Place%2C+Colombo+07",
+    "description": [
+      "The shortest and most applied of our courses: how philosophical ideas show up in ordinary decisions, routines, and relationships.",
+      "Drawing on Stoic, Buddhist, and existentialist ideas, we look at practical questions — how to handle a bad day, what habits are worth keeping, what \"a good life\" might mean for you specifically.",
+      "No essays, no exams — just structured conversation and a few short readings each week."
+    ]
+  }
+]
