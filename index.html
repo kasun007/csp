@@ -6,7 +6,7 @@
   <meta http-equiv="refresh" content="0; url=/en/index.html">
   <script>
     (function () {
-      var supported = ["en", "si", "ta"];
+      var supported = ["en", "si"];
       var lang = (navigator.language || "en").slice(0, 2).toLowerCase();
       var target = supported.includes(lang) ? lang : "en";
       window.location.replace("/" + target + "/index.html");
