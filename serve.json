@@ -7,6 +7,8 @@
     { "source": "/en/courses", "destination": "/en/courses/index.html" },
     { "source": "/si/courses", "destination": "/si/courses/index.html" },
     { "source": "/en/books", "destination": "/en/books/index.html" },
-    { "source": "/si/books", "destination": "/si/books/index.html" }
+    { "source": "/si/books", "destination": "/si/books/index.html" },
+    { "source": "/en/videos", "destination": "/en/videos/index.html" },
+    { "source": "/si/videos", "destination": "/si/videos/index.html" }
   ]
 }

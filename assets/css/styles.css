@@ -415,6 +415,18 @@ ul {
   border: 0;
 }
 
+.video-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.video-card h3 {
+  max-width: 48rem;
+  margin: 0 auto 1rem;
+  text-align: center;
+}
+
 /* ---------- Quote band ---------- */
 .quote-band {
   padding: 1rem 0 0.5rem;

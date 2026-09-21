@@ -206,6 +206,29 @@ async function renderBookList() {
   list.innerHTML = books.map((book) => bookCardHTML(book, locale)).join("");
 }
 
+function videoCardHTML(video) {
+  const src = `https://www.youtube.com/embed/${video.youtubeId}${video.start ? `?start=${video.start}` : ""}`;
+  return `
+    <div class="video-card">
+      <h3>${video.title}</h3>
+      <div class="video-embed">
+        <iframe src="${src}" title="${video.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" allowfullscreen></iframe>
+      </div>
+    </div>`;
+}
+
+async function renderVideoList() {
+  const list = document.getElementById("video-list");
+  if (!list) return;
+  const locale = currentLocale();
+
+  const res = await fetch(`/assets/data/videos.${locale}.json`, { cache: "no-store" });
+  if (!res.ok) return;
+  const videos = await res.json();
+
+  list.innerHTML = videos.map((video) => videoCardHTML(video)).join("");
+}
+
 function descriptionParagraphsHTML(description) {
   return description
     .split(/\n\s*\n/)
@@ -376,6 +399,7 @@ async function init() {
   await renderCourseList();
   await renderCourseDetail();
   await renderBookList();
+  await renderVideoList();
   await renderTimeline();
   wireFilterPills();
 }
