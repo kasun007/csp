@@ -2,8 +2,8 @@
 
   {
     "slug": "deconstruction",
-    "category": "deconstruction",
-    "categoryLabel": "විසංයෝජනය",
+    "category": "open",
+    "categoryLabel": "දැන් විවෘතව පාඨමාලා",
     "title": "විසංයෝජනය පාඨමාලාව",
     "summary": "ඩෙරීඩාගේ Plato's Pharmacy සමීපව කියවීම.",
     "duration": "මාස 6",
@@ -23,8 +23,8 @@
     "image": "/assets/img/courses/derrida.jpeg"
   },{
     "slug": "postmodernism",
-    "category": "postmodernism",
-    "categoryLabel": "පශ්චාත්නූතනවාදය",
+    "category": "completed",
+    "categoryLabel": "අවසන් වූ පාඨමාලා",
     "title": "පශ්චාත්නූතනවාදය",
     "summary": "ලියොතාගේ කෘතිය සමීපව කියවීම.",
     "duration": "මාස 6",

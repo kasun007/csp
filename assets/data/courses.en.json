@@ -1,8 +1,8 @@
 [
   {
     "slug": "deconstruction",
-    "category": "deconstruction",
-    "categoryLabel": "Deconstruction",
+    "category": "open",
+    "categoryLabel": "Now Open Courses",
     "title": "The Deconstruction Course",
     "summary": "A close reading of Derrida's Plato's Pharmacy.",
     "duration": "6 months",
@@ -23,8 +23,8 @@
   },
   {
     "slug": "postmodernism",
-    "category": "postmodernism",
-    "categoryLabel": "Postmodernism",
+    "category": "completed",
+    "categoryLabel": "Completed Courses",
     "title": "Postmodernism",
     "summary": "A close reading of Lyotard's work.",
     "duration": "6 months",
