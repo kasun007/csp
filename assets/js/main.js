@@ -213,6 +213,22 @@ function descriptionParagraphsHTML(description) {
     .join("");
 }
 
+function timelineDescriptionHTML(description, strings) {
+  const paragraphs = description.split(/\n\s*\n/).map((paragraph) => paragraph.trim());
+  const [first, ...rest] = paragraphs;
+
+  if (rest.length === 0) {
+    return `<p>${first}</p>`;
+  }
+
+  return `
+    <p>${first}</p>
+    <details class="timeline-more">
+      <summary>${strings.readMore}</summary>
+      ${rest.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+    </details>`;
+}
+
 function timelineItemHTML(item, index, locale) {
   const strings = STRINGS[locale] || STRINGS.en;
 
@@ -250,7 +266,7 @@ function timelineItemHTML(item, index, locale) {
       <div class="timeline-content">
         <span class="timeline-year">${item.year}</span>
         <h3>${item.title}</h3>
-        ${descriptionParagraphsHTML(item.description)}
+        ${timelineDescriptionHTML(item.description, strings)}
         ${item.location ? `<p class="timeline-location">${item.location}</p>` : ""}
       </div>
     </div>`;

@@ -824,6 +824,30 @@ ul {
   font-style: italic;
 }
 
+.timeline-more summary {
+  cursor: pointer;
+  list-style: none;
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.timeline-more summary::-webkit-details-marker {
+  display: none;
+}
+
+.timeline-more summary::after {
+  content: " \25be";
+}
+
+.timeline-more[open] summary::after {
+  content: " \25b4";
+}
+
+.timeline-more p {
+  margin-top: 1em;
+}
+
 .timeline-item--closing h3 {
   font-family: var(--font-serif);
   font-size: 1.6rem;
