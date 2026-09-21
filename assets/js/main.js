@@ -17,7 +17,11 @@ const STRINGS = {
     backToCourses: "All courses",
     starts: "Starts",
     viewOnMap: "View on map",
-    viewFullPage: "View full page",
+    readMore: "Read more",
+    instructor: "Instructor",
+    fee: "Fee",
+    currency: "Rs.",
+    journeyContinues: "The Journey Continues →",
   },
   si: {
     allCourses: "සියලු පාඨමාලා",
@@ -25,7 +29,11 @@ const STRINGS = {
     backToCourses: "සියලු පාඨමාලා",
     starts: "ආරම්භය",
     viewOnMap: "සිතියමේ බලන්න",
-    viewFullPage: "සම්පූර්ණ පිටුව බලන්න",
+    readMore: "වැඩිදුර කියවන්න",
+    instructor: "පාඨමාලාව මෙහෙයවීම",
+    fee: "ලියාපදිංචි ගාස්තුව",
+    currency: "රු.",
+    journeyContinues: "ගමන දිගටම යයි →",
   },
 };
 
@@ -95,27 +103,24 @@ function wireFilterPills() {
 
 function courseEntryRowHTML(course, locale) {
   const strings = STRINGS[locale] || STRINGS.en;
+  const href = `/${locale}/courses/course.html?slug=${encodeURIComponent(course.slug)}`;
   return `
-    <details class="entry-row entry-accordion" name="course-accordion" data-category="${course.category}">
-      <summary class="entry-summary">
+    <div class="entry-row entry-row--linked" data-category="${course.category}">
+      <div class="entry-summary-main">
+        ${course.image ? `<img class="entry-thumb" src="${course.image}" alt="">` : ""}
         <div>
           <h3>${course.title}</h3>
           <p>${course.summary}</p>
+          <p><a class="read-more" href="${href}">${strings.readMore}</a></p>
         </div>
-        <div class="entry-meta">
-          <div class="meta-row">
-            <span><svg class="icon meta-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> ${course.duration}</span>
-            <span><svg class="icon meta-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg> ${course.format}</span>
-          </div>
-        </div>
-      </summary>
-      <div class="entry-accordion-details">
-        <p class="meta">${strings.starts} ${course.startDate} &middot; ${course.startTime}</p>
-        <p class="meta">${course.location} &mdash; <a href="${course.mapUrl}" target="_blank" rel="noopener noreferrer">${strings.viewOnMap}</a></p>
-        ${course.description.map((paragraph) => `<p>${paragraph}</p>`).join("")}
-        <p><a href="/${locale}/courses/course.html?slug=${encodeURIComponent(course.slug)}">${strings.viewFullPage}</a></p>
       </div>
-    </details>`;
+      <div class="entry-meta">
+        <div class="meta-row">
+          <span><svg class="icon meta-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg> ${course.duration}</span>
+          <span><svg class="icon meta-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg> ${course.format}</span>
+        </div>
+      </div>
+    </div>`;
 }
 
 async function renderCourseList() {
@@ -124,7 +129,7 @@ async function renderCourseList() {
   const locale = currentLocale();
   const strings = STRINGS[locale] || STRINGS.en;
 
-  const res = await fetch(`/assets/data/courses.${locale}.json`);
+  const res = await fetch(`/assets/data/courses.${locale}.json`, { cache: "no-store" });
   if (!res.ok) return;
   const courses = await res.json();
 
@@ -155,7 +160,7 @@ async function renderCourseDetail() {
   const slug = new URLSearchParams(window.location.search).get("slug");
   const backHref = `/${locale}/courses/index.html`;
 
-  const res = await fetch(`/assets/data/courses.${locale}.json`);
+  const res = await fetch(`/assets/data/courses.${locale}.json`, { cache: "no-store" });
   const courses = res.ok ? await res.json() : [];
   const course = courses.find((c) => c.slug === slug);
 
@@ -166,12 +171,174 @@ async function renderCourseDetail() {
 
   document.title = `${course.title} — Colombo School of Philosophy`;
   el.innerHTML = `
+    ${course.image ? `<div class="detail-photo"><img src="${course.image}" alt=""></div>` : ""}
     <h1>${course.title}</h1>
     <p class="meta">${course.duration} &middot; ${course.format}</p>
     <p class="meta">${strings.starts} ${course.startDate} &middot; ${course.startTime}</p>
     <p class="meta">${course.location} &mdash; <a href="${course.mapUrl}" target="_blank" rel="noopener noreferrer">${strings.viewOnMap}</a></p>
+    ${course.instructor ? `<p class="meta">${strings.instructor}: ${course.instructor}</p>` : ""}
+    ${course.fee ? `<p class="meta">${strings.fee}: ${course.fee}</p>` : ""}
     ${course.description.map((paragraph) => `<p>${paragraph}</p>`).join("")}
     <p><a href="${backHref}">${strings.backToCourses}</a></p>`;
+}
+
+function bookCardHTML(book, locale) {
+  const strings = STRINGS[locale] || STRINGS.en;
+  return `
+    <div class="book-card">
+      <div class="book-cover"><img src="${book.image}" alt="${book.title}"></div>
+      <h3>${book.title}</h3>
+      ${book.subtitle ? `<p class="book-subtitle">${book.subtitle}</p>` : ""}
+      <p class="meta">${book.author}</p>
+      <p class="book-price">${strings.currency} ${book.price}</p>
+    </div>`;
+}
+
+async function renderBookList() {
+  const list = document.getElementById("book-list");
+  if (!list) return;
+  const locale = currentLocale();
+
+  const res = await fetch(`/assets/data/books.${locale}.json`, { cache: "no-store" });
+  if (!res.ok) return;
+  const books = await res.json();
+
+  list.innerHTML = books.map((book) => bookCardHTML(book, locale)).join("");
+}
+
+function timelineItemHTML(item, index, locale) {
+  const strings = STRINGS[locale] || STRINGS.en;
+
+  if (item.closing) {
+    return `
+      <div class="timeline-item timeline-item--closing">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          <p class="timeline-continues">${strings.journeyContinues}</p>
+        </div>
+      </div>`;
+  }
+
+  const isReverse = index % 2 === 1;
+  const hasImage = Boolean(item.image);
+  const mediaHTML = hasImage
+    ? `
+      <div class="timeline-media">
+        <button class="timeline-image-btn" type="button" data-image-index="${item._imageIndex}">
+          <img src="${item.image}" alt="${item.title}" loading="lazy">
+          <span class="timeline-hover-caption">
+            <span class="timeline-hover-year">${item.year}</span>
+            <span class="timeline-hover-title">${item.title}</span>
+          </span>
+        </button>
+      </div>`
+    : "";
+
+  return `
+    <div class="timeline-item${isReverse ? " timeline-item--reverse" : ""}${hasImage ? "" : " timeline-item--text-only"}">
+      <div class="timeline-marker"></div>
+      ${mediaHTML}
+      <div class="timeline-content">
+        <span class="timeline-year">${item.year}</span>
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+        ${item.location ? `<p class="timeline-location">${item.location}</p>` : ""}
+      </div>
+    </div>`;
+}
+
+function wireTimelineReveal(list) {
+  const items = list.querySelectorAll(".timeline-item");
+  if (!("IntersectionObserver" in window)) {
+    items.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+  items.forEach((item) => observer.observe(item));
+}
+
+function wireTimelineLightbox(list, imageItems) {
+  const lightbox = document.getElementById("timeline-lightbox");
+  if (!lightbox || imageItems.length === 0) return;
+
+  const imageEl = lightbox.querySelector(".lightbox-image");
+  const yearEl = lightbox.querySelector(".lightbox-year");
+  const titleEl = lightbox.querySelector(".lightbox-title");
+  const descriptionEl = lightbox.querySelector(".lightbox-description");
+  let currentIndex = 0;
+
+  function show(index) {
+    currentIndex = (index + imageItems.length) % imageItems.length;
+    const item = imageItems[currentIndex];
+    imageEl.src = item.image;
+    imageEl.alt = item.title;
+    yearEl.textContent = item.year || "";
+    titleEl.textContent = item.title;
+    descriptionEl.textContent = item.description;
+  }
+
+  function open(index) {
+    show(index);
+    lightbox.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+
+  function close() {
+    lightbox.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  list.querySelectorAll(".timeline-image-btn").forEach((btn) => {
+    btn.addEventListener("click", () => open(Number(btn.dataset.imageIndex)));
+  });
+
+  lightbox.querySelectorAll("[data-lightbox-close]").forEach((el) => {
+    el.addEventListener("click", close);
+  });
+  lightbox.querySelector("[data-lightbox-prev]").addEventListener("click", () => show(currentIndex - 1));
+  lightbox.querySelector("[data-lightbox-next]").addEventListener("click", () => show(currentIndex + 1));
+
+  document.addEventListener("keydown", (e) => {
+    if (lightbox.hidden) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(currentIndex - 1);
+    if (e.key === "ArrowRight") show(currentIndex + 1);
+  });
+}
+
+async function renderTimeline() {
+  const list = document.getElementById("timeline-list");
+  if (!list) return;
+  const locale = currentLocale();
+
+  const res = await fetch(`/assets/data/timeline.${locale}.json`, { cache: "no-store" });
+  if (!res.ok) return;
+  const items = await res.json();
+
+  const imageItems = [];
+  items.forEach((item) => {
+    if (item.image) {
+      item._imageIndex = imageItems.length;
+      imageItems.push(item);
+    }
+  });
+
+  list.innerHTML = items.map((item, index) => timelineItemHTML(item, index, locale)).join("");
+
+  wireTimelineReveal(list);
+  wireTimelineLightbox(list, imageItems);
 }
 
 async function init() {
@@ -185,6 +352,8 @@ async function init() {
   highlightActiveLink();
   await renderCourseList();
   await renderCourseDetail();
+  await renderBookList();
+  await renderTimeline();
   wireFilterPills();
 }
 

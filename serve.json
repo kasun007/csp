@@ -1,0 +1,12 @@
+{
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/en", "destination": "/en/index.html" },
+    { "source": "/si", "destination": "/si/index.html" },
+    { "source": "/en/courses", "destination": "/en/courses/index.html" },
+    { "source": "/si/courses", "destination": "/si/courses/index.html" },
+    { "source": "/en/books", "destination": "/en/books/index.html" },
+    { "source": "/si/books", "destination": "/si/books/index.html" }
+  ]
+}

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Serif+Sinhala:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=2">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=17">
 </head>
 <body>
   <div id="header-placeholder"></div>
@@ -21,14 +21,11 @@
         <div>
           <h1>Colombo School of Philosophy</h1>
           <p class="lead">A public philosophy school for Sri Lanka &mdash; courses, talks, and conversation in English and Sinhala.</p>
+          <p class="hero-tagline">What does it mean to live philosophically?</p>
           <div class="hero-actions">
             <a class="button" href="/en/courses/index.html">See the courses</a>
             <a class="button secondary" href="/en/about.html">Read our story</a>
           </div>
-          <ul class="colophon">
-            <li>Colombo School of Philosophy</li>
-            <li>කොළඹ දර්ශන ගුරුකුලය</li>
-          </ul>
         </div>
         <div class="hero-photo">
           <img src="https://images.unsplash.com/photo-1741268474023-74a2efe8536b?w=900&q=80&auto=format&fit=crop" alt="A classical marble statue, photographed with dramatic light and shadow" loading="eager">
@@ -75,6 +72,17 @@
       </div>
     </section>
 
+    <section class="section timeline-section">
+      <div class="container">
+        <div class="section-heading timeline-intro">
+          <h2>Our Journey</h2>
+          <p class="lead">The Story of the Colombo School of Philosophy</p>
+          <p>Ideas grow through conversation. From its earliest discussions to a growing community of thinkers, explore the journey of the Colombo School of Philosophy.</p>
+        </div>
+        <div class="timeline" id="timeline-list"></div>
+      </div>
+    </section>
+
     <section class="section quote-band">
       <div class="container">
         <blockquote class="pull-quote">
@@ -82,12 +90,27 @@
           <cite>Socrates</cite>
         </blockquote>
         <p>Join a growing community of people across Sri Lanka who meet to think, question, and reason together.</p>
-        <a class="button secondary" href="/en/events/index.html">See what's on</a>
+        <a class="button secondary" href="/en/courses/index.html">See the courses</a>
       </div>
     </section>
   </main>
 
+  <div class="lightbox" id="timeline-lightbox" hidden>
+    <div class="lightbox-backdrop" data-lightbox-close></div>
+    <button class="lightbox-close" data-lightbox-close aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" data-lightbox-prev aria-label="Previous photograph">&larr;</button>
+    <figure class="lightbox-figure">
+      <img class="lightbox-image" src="" alt="">
+      <figcaption>
+        <span class="lightbox-year"></span>
+        <span class="lightbox-title"></span>
+        <p class="lightbox-description"></p>
+      </figcaption>
+    </figure>
+    <button class="lightbox-nav lightbox-next" data-lightbox-next aria-label="Next photograph">&rarr;</button>
+  </div>
+
   <div id="footer-placeholder"></div>
-  <script src="/assets/js/main.js?v=2"></script>
+  <script src="/assets/js/main.js?v=6"></script>
 </body>
 </html>

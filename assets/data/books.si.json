@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "philosophical-journal",
+    "title": "දාර්ශනික පත්‍රිකා",
+    "subtitle": "ඉතිහාසය, සමකාලීනත්වය, ලාංකිකත්වය",
+    "author": "සංස්කරණය: රංග මනුප්‍රිය",
+    "price": 750,
+    "image": "/assets/img/books/philosophical-journal.jpeg"
+  },
+  {
+    "slug": "being-and-thinking",
+    "title": "පැවැත්ම සහ සිතීම",
+    "subtitle": "",
+    "author": "වංගීස සුමනසේකර",
+    "price": 750,
+    "image": "/assets/img/books/being-and-thinking.jpeg"
+  },
+  {
+    "slug": "alternative-introduction",
+    "title": "විකල්ප නලින්වාදයකට හැඳින්වීමක්",
+    "subtitle": "",
+    "author": "වංගීස සුමනසේකර",
+    "price": 750,
+    "image": "/assets/img/books/alternative-introduction.jpeg"
+  },
+  {
+    "slug": "politics-of-universality",
+    "title": "විශ්වීයත්වයේ දේශපාලනය",
+    "subtitle": "විමුක්ති ආත්මයේ ප්‍රභවය, බලාපොරොත්තුව සහ අර්බුදය",
+    "author": "රංග මනුප්‍රිය, වරංග ද සිල්වා, වංගීස සුමනසේකර",
+    "price": 750,
+    "image": "/assets/img/books/politics-of-universality.jpeg"
+  },
+  {
+    "slug": "after-finitude",
+    "title": "පරිමිතත්වයෙන් පසු",
+    "subtitle": "අහඹුවේ අනිවාර්යතාව පිළිබඳ රචනයක්",
+    "author": "කොන්ටෙන් මෙයසූ",
+    "price": 1500,
+    "image": "/assets/img/books/afterFinitude.jpeg"
+  }
+]

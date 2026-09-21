@@ -1,0 +1,41 @@
+[
+  {
+    "year": "2018",
+    "title": "The Beginning",
+    "description": "The people who would go on to found CSP first read philosophy together in a public course on Kant's Critique of Pure Reason, held at Theertha Red Dot Gallery.",
+    "location": "Theertha Red Dot Gallery, Borella",
+    "image": "/assets/img/images/kant-course-2018.jpeg"
+  },
+  {
+    "year": "2019",
+    "title": "First Discussions",
+    "description": "Small, informal reading circles brought the same group together on a regular basis, shaping the questions CSP would eventually be built to ask.",
+    "image": "/assets/img/images/reading-circle.jpeg"
+  },
+  {
+    "year": "2020",
+    "title": "CSP Takes Shape",
+    "description": "Those early conversations became a deliberate project: an academic vision, a name, and a plan for teaching philosophy in both English and Sinhala."
+  },
+  {
+    "year": "2021",
+    "title": "First Events & Lectures",
+    "description": "CSP held its first public lectures and workshops, opening its reading rooms to anyone curious enough to walk in.",
+    "image": "/assets/img/images/panel-discussion.jpeg"
+  },
+  {
+    "year": "2023",
+    "title": "Growing Community",
+    "description": "A widening circle of students, lecturers, and collaborators joined CSP's programmes, carrying philosophical discussion into new rooms and new cities."
+  },
+  {
+    "year": "2026",
+    "title": "CSP Today",
+    "description": "CSP now runs regular courses, talks, and publications in English and Sinhala, working to make philosophical thinking part of everyday life in Sri Lanka."
+  },
+  {
+    "title": "Looking Forward",
+    "description": "The work continues: building a stronger culture of philosophical inquiry, critical thinking, and dialogue across Sri Lanka.",
+    "closing": true
+  }
+]

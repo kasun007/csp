@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "philosophical-journal",
+    "title": "Philosophical Journal",
+    "subtitle": "History, Contemporaneity, Sri Lankan-ness",
+    "author": "Edited by Ranga Manupriya",
+    "price": 750,
+    "image": "/assets/img/books/philosophical-journal.jpeg"
+  },
+  {
+    "slug": "being-and-thinking",
+    "title": "Being and Thinking",
+    "subtitle": "",
+    "author": "Wangeesa Sumanasekara",
+    "price": 750,
+    "image": "/assets/img/books/being-and-thinking.jpeg"
+  },
+  {
+    "slug": "alternative-introduction",
+    "title": "විකල්ප නලින්වාදයකට හැඳින්වීමක්",
+    "subtitle": "",
+    "author": "Wangeesa Sumanasekara",
+    "price": 750,
+    "image": "/assets/img/books/alternative-introduction.jpeg"
+  },
+  {
+    "slug": "politics-of-universality",
+    "title": "The Politics of Universality",
+    "subtitle": "The Origin, Promise, and Crisis of the Liberatory Self",
+    "author": "Ranga Manupriya, Waranga de Silva, Wangeesa Sumanasekara",
+    "price": 750,
+    "image": "/assets/img/books/politics-of-universality.jpeg"
+  },
+  {
+    "slug": "after-finitude",
+    "title": "පරිමිතත්වයෙන් පසු",
+    "subtitle": "අහඹුවේ අනිවාර්යතාව පිළිබඳ රචනයක්",
+    "author": "Quentin Meillassoux",
+    "price": 1500,
+    "image": "/assets/img/books/afterFinitude.jpeg"
+  }
+]
