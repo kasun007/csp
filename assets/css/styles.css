@@ -483,6 +483,7 @@ ul {
 .manuscript-band h1 {
   color: var(--color-parchment);
   max-width: 16ch;
+  margin-bottom: 1rem;
 }
 
 .manuscript-band .lead {
