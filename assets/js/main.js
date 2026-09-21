@@ -12,7 +12,6 @@ const LOCALES = ["en", "si"];
 
 const STRINGS = {
   en: {
-    allCourses: "All Courses",
     notFound: "Course not found.",
     backToCourses: "All courses",
     starts: "Starts",
@@ -24,7 +23,6 @@ const STRINGS = {
     journeyContinues: "The Journey Continues →",
   },
   si: {
-    allCourses: "සියලු පාඨමාලා",
     notFound: "පාඨමාලාව හමු නොවීය.",
     backToCourses: "සියලු පාඨමාලා",
     starts: "ආරම්භය",
@@ -143,13 +141,22 @@ async function renderCourseList() {
         categories.push({ category: course.category, label: course.categoryLabel });
       }
     });
-    const pillsHTML = [`<button class="filter-pill active" data-filter="all">${strings.allCourses}</button>`]
-      .concat(categories.map((c) => `<button class="filter-pill" data-filter="${c.category}">${c.label}</button>`))
+    const pillsHTML = categories
+      .map((c, i) => `<button class="filter-pill${i === 0 ? " active" : ""}" data-filter="${c.category}">${c.label}</button>`)
       .join("");
     filters.innerHTML = pillsHTML;
   }
 
   list.innerHTML = courses.map((course) => courseEntryRowHTML(course, locale)).join("");
+
+  if (filters) {
+    const defaultFilter = filters.querySelector(".filter-pill")?.dataset.filter;
+    if (defaultFilter) {
+      list.querySelectorAll("[data-category]").forEach((card) => {
+        card.style.display = card.dataset.category === defaultFilter ? "" : "none";
+      });
+    }
+  }
 }
 
 async function renderCourseDetail() {
