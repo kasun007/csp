@@ -206,6 +206,13 @@ async function renderBookList() {
   list.innerHTML = books.map((book) => bookCardHTML(book, locale)).join("");
 }
 
+function descriptionParagraphsHTML(description) {
+  return description
+    .split(/\n\s*\n/)
+    .map((paragraph) => `<p>${paragraph.trim()}</p>`)
+    .join("");
+}
+
 function timelineItemHTML(item, index, locale) {
   const strings = STRINGS[locale] || STRINGS.en;
 
@@ -215,7 +222,7 @@ function timelineItemHTML(item, index, locale) {
         <div class="timeline-marker"></div>
         <div class="timeline-content">
           <h3>${item.title}</h3>
-          <p>${item.description}</p>
+          ${descriptionParagraphsHTML(item.description)}
           <p class="timeline-continues">${strings.journeyContinues}</p>
         </div>
       </div>`;
@@ -243,7 +250,7 @@ function timelineItemHTML(item, index, locale) {
       <div class="timeline-content">
         <span class="timeline-year">${item.year}</span>
         <h3>${item.title}</h3>
-        <p>${item.description}</p>
+        ${descriptionParagraphsHTML(item.description)}
         ${item.location ? `<p class="timeline-location">${item.location}</p>` : ""}
       </div>
     </div>`;

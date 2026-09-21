@@ -964,6 +964,7 @@ ul {
   max-width: 34rem;
   margin: 0 auto;
   font-size: 0.9rem;
+  white-space: pre-line;
 }
 
 .lightbox-close {
