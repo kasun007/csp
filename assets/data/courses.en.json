@@ -1,110 +1,46 @@
 [
   {
-    "slug": "introduction-to-philosophy",
-    "category": "introduction",
-    "categoryLabel": "Introduction",
-    "title": "Introduction to Philosophy",
-    "summary": "Big questions, clear thinking.",
-    "duration": "8 weeks",
-    "format": "Online",
-    "startDate": "6 October 2026",
-    "startTime": "Mondays, 6:00 PM",
-    "location": "CSP Learning Center, 45 Ward Place, Colombo 07",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=CSP+Learning+Center%2C+45+Ward+Place%2C+Colombo+07",
+    "slug": "deconstruction",
+    "category": "deconstruction",
+    "categoryLabel": "Deconstruction",
+    "title": "The Deconstruction Course",
+    "summary": "A close reading of Derrida's Plato's Pharmacy.",
+    "duration": "6 months",
+    "format": "Live session",
+    "startDate": "1 August 2026",
+    "startTime": "Saturdays, 10:30 AM to 12:30 PM",
+    "location": "Mahaweli Centre, Colombo 07",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mahaweli+Centre%2C+Colombo+07",
+    "fee": "Rs. 5,000 (monthly)",
     "description": [
-      "This course is where most people start: a guided tour through the biggest questions philosophy asks, and the different ways thinkers have tried to answer them.",
-      "Across eight weeks, we cover knowledge, ethics, mind, and meaning — not as separate boxes, but as questions that connect to how you actually think and live. No prior background is expected.",
-      "Each week pairs a short reading with a live discussion, so you're not just absorbing ideas but testing them against other people's thinking."
-    ]
+      "A study circle collectively reading Jacques Derrida's essay \"Plato's Pharmacy\" begins this Saturday (August 1st). Its aim, quite simply, is to offer an introduction to the French philosopher &mdash; or, more accurately, anti-philosopher &mdash; named Jacques Derrida.",
+      "We know that well-known introductions to Derrida have already been given in our country throughout the 1990s. Alongside Deepthi Kumara Gunaratne's Art and Deconstruction, and the articles he wrote on this subject in journals such as Pravada, Mathota, and London; Nalin Swaris's essay \"Derrida's Deconstruction and the Buddha's Anatta-vada as Social Critique\"; Rohan Perera's rather different essay \"When Derrida Deconstructs Before an Asian Buddhist Woman\"; one could also place the various writings of Desmond Mallikarachchi, Sasanka Perera, Saman Wickramaarachchi, K. K. Saman Kumara, Nalin de Silva, and others.",
+      "But what we are going to do is not add yet another introduction to this long list of &ldquo;introductions to Derrida.&rdquo; Instead, what we are going to do is something no one has done before: read Derrida collectively and closely. We are trying to reconstruct Derridean deconstruction in the Sinhala language. Put differently, we are not trying to offer summaries such as &ldquo;for Derrida, difference is more primordial than identity&hellip;&rdquo; Instead, we are trying to dissect one of Derrida's own sutra-like essays sentence by sentence. This will therefore create space for the experience of actually reading Derrida.",
+      "This is extremely challenging, because &ldquo;reading&rdquo; is something Derrida takes very seriously. The method we have used for years to render philosophers' ideas into Sinhala will be sharply tested here. This is precisely why this is, in no way, a &ldquo;popular project.&rdquo; It is a difficult exercise that takes time. But anyone interested in such a thing can take part in this. This does not require agreement with our political or philosophical positions. Anyone interested, for whatever reason, in gaining a high level of understanding of Derrida can take part in this. This is why we invite everyone who wishes to study this to join us.",
+      "K. K. Saman Kumara famously called Derridean deconstruction a &ldquo;magic wand.&rdquo; In our honest view, this description still holds, more or less, to this day. &ldquo;Derrida&rdquo; and &ldquo;deconstruction&rdquo; remain, for many in our country, a magic wand. If you want to know how this magic trick is done, come to the Mahaweli Centre in Colombo to join our Derrida reading, held every Saturday at 10:30 AM."
+    ],
+    "image": "/assets/img/courses/derrida.jpeg"
   },
   {
-    "slug": "ethics-in-the-modern-world",
-    "category": "ethics",
-    "categoryLabel": "Ethics",
-    "title": "Ethics in the Modern World",
-    "summary": "Ancient wisdom, modern life.",
-    "duration": "6 weeks",
-    "format": "Online",
-    "startDate": "7 October 2026",
-    "startTime": "Tuesdays, 6:30 PM",
-    "location": "CSP Learning Center, 45 Ward Place, Colombo 07",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=CSP+Learning+Center%2C+45+Ward+Place%2C+Colombo+07",
+    "slug": "postmodernism",
+    "category": "postmodernism",
+    "categoryLabel": "Postmodernism",
+    "title": "Postmodernism",
+    "summary": "A close reading of Lyotard's work.",
+    "duration": "6 months",
+    "format": "Live session",
+    "startDate": "17 October 2026",
+    "startTime": "Saturdays, 10:00 AM to 12:00 PM",
+    "location": "Mahaweli Centre, Colombo 07",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mahaweli+Centre%2C+Colombo+07",
+    "instructor": "Vangeesa Sumanasekara",
+    "fee": "Rs. 5,000",
     "description": [
-      "What do we owe each other? This course works through the major ethical frameworks — consequences, duty, character, care — and applies them to problems people actually face today.",
-      "Expect case studies drawn from everyday life in Sri Lanka and beyond: fairness at work, family obligation, and the small decisions that add up to a life.",
-      "By the end, you won't have one tidy answer to \"what's right\" — but you'll have sharper tools for working it out."
-    ]
-  },
-  {
-    "slug": "political-philosophy",
-    "category": "political-philosophy",
-    "categoryLabel": "Political Philosophy",
-    "title": "Political Philosophy",
-    "summary": "Power, justice, and society.",
-    "duration": "8 weeks",
-    "format": "Online",
-    "startDate": "8 October 2026",
-    "startTime": "Wednesdays, 6:00 PM",
-    "location": "Colombo Public Library Hall, Colombo 07",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Colombo+Public+Library%2C+Colombo+07",
-    "description": [
-      "Why do we accept some authority as legitimate and reject other kinds? This course traces the major arguments about the state, justice, and collective life.",
-      "We read across traditions — not just the usual Western canon — and connect the arguments to real questions about governance, rights, and civic life in Sri Lanka today.",
-      "No political affiliation assumed or required. The goal is to think more carefully, not to arrive at a party line."
-    ]
-  },
-  {
-    "slug": "philosophy-of-mind",
-    "category": "philosophy-of-mind",
-    "categoryLabel": "Philosophy of Mind",
-    "title": "Philosophy of Mind",
-    "summary": "Consciousness, identity, reality.",
-    "duration": "8 weeks",
-    "format": "Online",
-    "startDate": "9 October 2026",
-    "startTime": "Thursdays, 6:30 PM",
-    "location": "CSP Learning Center, 45 Ward Place, Colombo 07",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=CSP+Learning+Center%2C+45+Ward+Place%2C+Colombo+07",
-    "description": [
-      "Is the mind the same thing as the brain? What makes you the same person you were ten years ago? This course takes on the oldest and strangest questions in philosophy.",
-      "We'll draw on both classic philosophical arguments and current findings from cognitive science, without assuming a science background.",
-      "Fair warning: several sessions in, most students start finding this course's questions hard to stop thinking about."
-    ]
-  },
-  {
-    "slug": "logic-and-critical-thinking",
-    "category": "logic",
-    "categoryLabel": "Logic",
-    "title": "Logic and Critical Thinking",
-    "summary": "Think clearly, argue better.",
-    "duration": "6 weeks",
-    "format": "Online",
-    "startDate": "10 October 2026",
-    "startTime": "Fridays, 5:30 PM",
-    "location": "Colombo Public Library Hall, Colombo 07",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Colombo+Public+Library%2C+Colombo+07",
-    "description": [
-      "A practical course: how to spot a bad argument, build a good one, and tell the difference under pressure.",
-      "We cover the basics of formal and informal logic, common fallacies, and how bias quietly shapes reasoning — including our own.",
-      "Useful well beyond philosophy: for work, debate, and the everyday task of deciding what to believe."
-    ]
-  },
-  {
-    "slug": "philosophy-in-everyday-life",
-    "category": "everyday-life",
-    "categoryLabel": "Everyday Life",
-    "title": "Philosophy in Everyday Life",
-    "summary": "Ideas for a more meaningful life.",
-    "duration": "4 weeks",
-    "format": "Online",
-    "startDate": "11 October 2026",
-    "startTime": "Saturdays, 10:00 AM",
-    "location": "CSP Community Room, Barnes Place, Colombo 07",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Barnes+Place%2C+Colombo+07",
-    "description": [
-      "The shortest and most applied of our courses: how philosophical ideas show up in ordinary decisions, routines, and relationships.",
-      "Drawing on Stoic, Buddhist, and existentialist ideas, we look at practical questions — how to handle a bad day, what habits are worth keeping, what \"a good life\" might mean for you specifically.",
-      "No essays, no exams — just structured conversation and a few short readings each week."
-    ]
+      "The aim of this course is to offer an introduction to postmodernism. For this, we closely read Jean-Fran&ccedil;ois Lyotard's work The Postmodern Condition. A written Sinhala introduction to each day's reading portion is provided. That text is composed with the aim of reconstructing Lyotard's work in the Sinhala language. It cannot be called a translation or an adaptation, because it includes additional clarifications and illustrations for the parts of Lyotard's ideas that are not so clear. But its real aim is that, by the end of reading that text, one gains an understanding of everything contained in Lyotard's work. In that sense, this can also be described as a kind of &ldquo;translation.&rdquo;",
+      "We are beginning this as part of a long-term project that opens up the philosophical foundations of a certain intellectual era we call &ldquo;the 90s.&rdquo; Accordingly, in addition to Lyotard, we will in future be offering similar introductions to the original works of thinkers such as Jacques Derrida and Michel Foucault. Rather than reading introductions written by others about them, our aim is to read the original works themselves. As we see it, a thinker truly confronts us only when we read his or her own original writing. What we have here is the first step in that direction. Through it, one gains the ability to understand the historical context of the new philosophical ideas we are proposing.",
+      "But taking part in this in no way requires becoming part of our broader philosophical project. Instead, this is open to anyone who is interested in learning about postmodernism. We honestly believe there is no other place in Sri Lanka where one can gain this level of understanding of this work. A major reason for this is that the number of people in our country who have read Lyotard's work from beginning to end is extremely limited. We do not believe that even that limited circle organizes something like this. This is why we honestly do not believe there is any other place in our country where one can gain this kind of understanding of the classic investigative work on the idea of &ldquo;postmodernism.&rdquo;",
+      "This is not something said for the sake of &ldquo;marketing&rdquo; &mdash; it is a regrettable truth about the intellectual decline of our country. The Colombo School of Philosophy is our own small contribution toward carrying this society forward, away from this regrettable fate."
+    ],
+    "image": "/assets/img/courses/li.jpeg"
   }
 ]
