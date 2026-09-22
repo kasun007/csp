@@ -931,8 +931,7 @@ ul {
 .timeline-image-btn img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
   filter: grayscale(0.3) sepia(0.12) contrast(1.05);
   transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
 }
