@@ -21,6 +21,20 @@ const STRINGS = {
     fee: "Fee",
     currency: "Rs.",
     journeyContinues: "The Journey Continues →",
+    addToCart: "Add to cart",
+    decreaseQty: "Decrease quantity",
+    increaseQty: "Increase quantity",
+    cartTitle: "Your Cart",
+    cartEmpty: "Your cart is empty. Add books above to get started.",
+    cartRemove: "Remove",
+    cartTotal: "Total",
+    cartSlipLabel: "Select your payment slip",
+    cartSlipHint: "This isn't uploaded automatically — attach it yourself in the WhatsApp chat that opens.",
+    cartSlipChosen: "Selected:",
+    cartCheckout: "Checkout on WhatsApp",
+    cartWhatsappGreeting: "Hi CSP, I'd like to order the following books:",
+    cartWhatsappTotal: "Total",
+    cartWhatsappClosing: "I'll attach my payment slip and delivery address in this chat.",
   },
   si: {
     notFound: "පාඨමාලාව හමු නොවීය.",
@@ -32,8 +46,25 @@ const STRINGS = {
     fee: "ලියාපදිංචි ගාස්තුව",
     currency: "රු.",
     journeyContinues: "ගමන දිගටම යයි →",
+    addToCart: "කරත්තයට එකතු කරන්න",
+    decreaseQty: "ප්‍රමාණය අඩු කරන්න",
+    increaseQty: "ප්‍රමාණය වැඩි කරන්න",
+    cartTitle: "ඔබේ කරත්තය",
+    cartEmpty: "ඔබේ කරත්තය හිස්ය. ආරම්භ කිරීමට ඉහත පොත් එකතු කරන්න.",
+    cartRemove: "ඉවත් කරන්න",
+    cartTotal: "එකතුව",
+    cartSlipLabel: "ඔබේ ගෙවීම් රිසිට් පත තෝරන්න",
+    cartSlipHint: "මෙය ස්වයංක්‍රීයව එවනු නොලැබේ — විවෘත වන WhatsApp සංවාදයේදී එය ඔබම අමුණන්න.",
+    cartSlipChosen: "තෝරාගත්තේ:",
+    cartCheckout: "WhatsApp හරහා ඇණවුම කරන්න",
+    cartWhatsappGreeting: "ආයුබෝවන් CSP, මට පහත පොත් ඇණවුම් කිරීමට අවශ්‍යයි:",
+    cartWhatsappTotal: "එකතුව",
+    cartWhatsappClosing: "මම මගේ ගෙවීම් රිසිට් පත සහ බෙදාහැරීමේ ලිපිනය මෙම සංවාදයට අමුණන්නෙමි.",
   },
 };
+
+const CART_STORAGE_KEY = "csp-cart-v1";
+const CART_WHATSAPP_NUMBER = "94712760993";
 
 function currentLocale() {
   const seg = window.location.pathname.split("/").filter(Boolean)[0];
@@ -192,13 +223,140 @@ async function renderCourseDetail() {
 function bookCardHTML(book, locale) {
   const strings = STRINGS[locale] || STRINGS.en;
   return `
-    <div class="book-card">
+    <div class="book-card" data-slug="${book.slug}">
       <div class="book-cover"><img src="${book.image}" alt="${book.title}"></div>
       <h3>${book.title}</h3>
       ${book.subtitle ? `<p class="book-subtitle">${book.subtitle}</p>` : ""}
       <p class="meta">${book.author}</p>
       <p class="book-price">${strings.currency} ${book.price}</p>
+      <div class="qty-stepper" data-slug="${book.slug}">
+        <button type="button" class="qty-btn qty-decrease" aria-label="${strings.decreaseQty}">&minus;</button>
+        <span class="qty-value">0</span>
+        <button type="button" class="qty-btn qty-increase" aria-label="${strings.increaseQty}">+</button>
+      </div>
     </div>`;
+}
+
+function getCart() {
+  try {
+    const raw = localStorage.getItem(CART_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveCart(cart) {
+  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+}
+
+function setCartQty(slug, qty) {
+  const cart = getCart();
+  if (qty <= 0) {
+    delete cart[slug];
+  } else {
+    cart[slug] = qty;
+  }
+  saveCart(cart);
+  return cart;
+}
+
+function syncBookCardQuantities(root) {
+  const cart = getCart();
+  root.querySelectorAll(".qty-stepper[data-slug]").forEach((stepper) => {
+    const qty = cart[stepper.dataset.slug] || 0;
+    stepper.querySelector(".qty-value").textContent = String(qty);
+  });
+}
+
+function cartLineItems(books, cart) {
+  return Object.entries(cart)
+    .map(([slug, qty]) => {
+      const book = books.find((b) => b.slug === slug);
+      if (!book) return null;
+      return { slug, title: book.title, price: book.price, qty, subtotal: book.price * qty };
+    })
+    .filter(Boolean);
+}
+
+function buildWhatsAppOrderUrl(items, total, locale) {
+  const strings = STRINGS[locale] || STRINGS.en;
+  const lines = [
+    strings.cartWhatsappGreeting,
+    "",
+    ...items.map((item) => `- ${item.title} x${item.qty} — ${strings.currency} ${item.subtotal}`),
+    "",
+    `${strings.cartWhatsappTotal}: ${strings.currency} ${total}`,
+    "",
+    strings.cartWhatsappClosing,
+  ];
+  return `https://wa.me/${CART_WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
+
+function cartItemRowHTML(item, strings) {
+  return `
+    <div class="cart-item" data-slug="${item.slug}">
+      <span class="cart-item-title">${item.title}</span>
+      <span class="cart-item-qty">&times;${item.qty}</span>
+      <span class="cart-item-subtotal">${strings.currency} ${item.subtotal}</span>
+      <button type="button" class="cart-item-remove" data-slug="${item.slug}">${strings.cartRemove}</button>
+    </div>`;
+}
+
+function renderCartPanel(books, locale) {
+  const panel = document.getElementById("cart-panel");
+  if (!panel) return;
+  const strings = STRINGS[locale] || STRINGS.en;
+  const cart = getCart();
+  const items = cartLineItems(books, cart);
+  const total = items.reduce((sum, item) => sum + item.subtotal, 0);
+
+  if (items.length === 0) {
+    panel.innerHTML = `
+      <h2>${strings.cartTitle}</h2>
+      <p class="cart-empty">${strings.cartEmpty}</p>`;
+    return;
+  }
+
+  panel.innerHTML = `
+    <h2>${strings.cartTitle}</h2>
+    <div class="cart-items">${items.map((item) => cartItemRowHTML(item, strings)).join("")}</div>
+    <div class="cart-total"><span>${strings.cartTotal}</span><span>${strings.currency} ${total}</span></div>
+    <div class="cart-slip">
+      <label for="cart-slip-input">${strings.cartSlipLabel}</label>
+      <input type="file" id="cart-slip-input" accept="image/*,.pdf">
+      <p class="cart-slip-hint">${strings.cartSlipHint}</p>
+      <p class="cart-slip-filename" id="cart-slip-filename"></p>
+    </div>
+    <a class="button cart-checkout-btn" id="cart-checkout-btn" href="${buildWhatsAppOrderUrl(items, total, locale)}" target="_blank" rel="noopener noreferrer">${strings.cartCheckout}</a>`;
+
+  panel.querySelectorAll(".cart-item-remove").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setCartQty(btn.dataset.slug, 0);
+      syncBookCardQuantities(document);
+      renderCartPanel(books, locale);
+    });
+  });
+
+  const slipInput = document.getElementById("cart-slip-input");
+  const slipFilename = document.getElementById("cart-slip-filename");
+  slipInput.addEventListener("change", () => {
+    slipFilename.textContent = slipInput.files[0] ? `${strings.cartSlipChosen} ${slipInput.files[0].name}` : "";
+  });
+}
+
+function wireBookCart(list, books, locale) {
+  list.addEventListener("click", (event) => {
+    const btn = event.target.closest(".qty-btn");
+    if (!btn) return;
+    const stepper = btn.closest(".qty-stepper");
+    const slug = stepper.dataset.slug;
+    const current = getCart()[slug] || 0;
+    const next = btn.classList.contains("qty-increase") ? current + 1 : Math.max(0, current - 1);
+    setCartQty(slug, next);
+    stepper.querySelector(".qty-value").textContent = String(next);
+    renderCartPanel(books, locale);
+  });
 }
 
 async function renderBookList() {
@@ -211,6 +369,9 @@ async function renderBookList() {
   const books = await res.json();
 
   list.innerHTML = books.map((book) => bookCardHTML(book, locale)).join("");
+  syncBookCardQuantities(list);
+  wireBookCart(list, books, locale);
+  renderCartPanel(books, locale);
 }
 
 function videoCardHTML(video) {
