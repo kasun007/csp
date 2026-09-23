@@ -430,24 +430,99 @@ ul {
 
 /* ---------- Highlights ---------- */
 .highlight-grid {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
   gap: 2rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
 }
 
 .highlight-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  flex: 1 1 18rem;
-  max-width: 22rem;
-  min-width: 16rem;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   overflow: hidden;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.highlight-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 0.3rem 1rem rgba(51, 73, 59, 0.1);
+}
+
+/* ---------- Highlights carousel (home page) ---------- */
+.carousel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.carousel-viewport {
+  flex: 1;
+  overflow: hidden;
+}
+
+.carousel-track {
+  --visible: 3;
+  display: flex;
+  gap: 2rem;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.carousel-track:active {
+  cursor: grabbing;
+}
+
+.carousel-track .highlight-card {
+  flex: 0 0 calc((100% - (var(--visible) - 1) * 2rem) / var(--visible));
+  user-select: none;
+}
+
+@media (max-width: 64rem) {
+  .carousel-track {
+    --visible: 2;
+  }
+}
+
+@media (max-width: 40rem) {
+  .carousel-track {
+    --visible: 1;
+  }
+}
+
+.carousel-arrow {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-parchment);
+  color: var(--color-ink);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.carousel-arrow:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (max-width: 40rem) {
+  .carousel-arrow {
+    display: none;
+  }
 }
 
 .highlight-card--latest {

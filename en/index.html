@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Serif+Sinhala:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=31">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=34">
 </head>
 <body>
   <div id="header-placeholder"></div>
@@ -48,11 +48,17 @@
       <div class="container">
         <div class="section-heading">
           <h2>Highlights</h2>
-          <p>See what we've been doing lately.</p>
+          <p>Latest activities, events and updates.</p>
         </div>
-        <div class="highlight-grid" id="highlights-home-list"></div>
+        <div class="carousel" id="highlights-carousel">
+          <button type="button" class="carousel-arrow carousel-arrow--prev" data-carousel-prev aria-label="Previous highlights">&larr;</button>
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="highlights-home-list"></div>
+          </div>
+          <button type="button" class="carousel-arrow carousel-arrow--next" data-carousel-next aria-label="Next highlights">&rarr;</button>
+        </div>
         <div class="highlights-cta">
-          <a class="button secondary" href="/en/highlights/index.html">View All Highlights</a>
+          <a class="button secondary" href="/en/highlights/index.html">View All Highlights &rarr;</a>
         </div>
       </div>
     </section>
@@ -81,6 +87,6 @@
   </main>
 
   <div id="footer-placeholder"></div>
-  <script src="/assets/js/main.js?v=13"></script>
+  <script src="/assets/js/main.js?v=14"></script>
 </body>
 </html>

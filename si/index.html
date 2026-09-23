@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Serif+Sinhala:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=31">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=34">
 </head>
 <body>
   <!-- DRAFT MACHINE TRANSLATION — please have a native Sinhala speaker review -->
@@ -49,11 +49,17 @@
       <div class="container">
         <div class="section-heading">
           <h2>විශේෂාංග</h2>
-          <p>අප මෑතකදී කළ දේ බලන්න.</p>
+          <p>නවතම ක්‍රියාකාරකම්, සිදුවීම් සහ යාවත්කාලීන කිරීම්.</p>
         </div>
-        <div class="highlight-grid" id="highlights-home-list"></div>
+        <div class="carousel" id="highlights-carousel">
+          <button type="button" class="carousel-arrow carousel-arrow--prev" data-carousel-prev aria-label="පෙර විශේෂාංග">&larr;</button>
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="highlights-home-list"></div>
+          </div>
+          <button type="button" class="carousel-arrow carousel-arrow--next" data-carousel-next aria-label="මීළඟ විශේෂාංග">&rarr;</button>
+        </div>
         <div class="highlights-cta">
-          <a class="button secondary" href="/si/highlights/index.html">සියලුම විශේෂාංග බලන්න</a>
+          <a class="button secondary" href="/si/highlights/index.html">සියලුම විශේෂාංග බලන්න &rarr;</a>
         </div>
       </div>
     </section>
@@ -82,6 +88,6 @@
   </main>
 
   <div id="footer-placeholder"></div>
-  <script src="/assets/js/main.js?v=13"></script>
+  <script src="/assets/js/main.js?v=14"></script>
 </body>
 </html>

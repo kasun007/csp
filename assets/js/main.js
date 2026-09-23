@@ -427,8 +427,6 @@ async function renderVideoList() {
   list.innerHTML = videos.map((video) => videoCardHTML(video)).join("");
 }
 
-const HIGHLIGHTS_HOME_LIMIT = 4;
-
 function sortHighlightsByDateDesc(items) {
   return [...items].sort((a, b) => new Date(b.date) - new Date(a.date));
 }
@@ -455,7 +453,7 @@ function highlightCardHTML(item, locale, isLatest) {
         <span class="highlight-date">${item.dateLabel || item.date}</span>
         <h3>${item.title}</h3>
         <p>${item.description}</p>
-        <a class="read-more" href="${href}">${strings.readMore}</a>
+        <a class="read-more" href="${href}">${strings.readMore} &rarr;</a>
       </div>
     </div>`;
 }
@@ -467,15 +465,124 @@ async function fetchHighlights(locale) {
 }
 
 async function renderHighlightsHome() {
-  const list = document.getElementById("highlights-home-list");
-  if (!list) return;
+  const track = document.getElementById("highlights-home-list");
+  if (!track) return;
   const locale = currentLocale();
   const items = await fetchHighlights(locale);
 
-  list.innerHTML = items
-    .slice(0, HIGHLIGHTS_HOME_LIMIT)
-    .map((item, index) => highlightCardHTML(item, locale, index === 0))
-    .join("");
+  track.innerHTML = items.map((item, index) => highlightCardHTML(item, locale, index === 0)).join("");
+  initHighlightsCarousel(document.getElementById("highlights-carousel"));
+}
+
+function initHighlightsCarousel(root) {
+  if (!root) return;
+  const track = root.querySelector(".carousel-track");
+  const viewport = root.querySelector(".carousel-viewport");
+  const prevBtn = root.querySelector("[data-carousel-prev]");
+  const nextBtn = root.querySelector("[data-carousel-next]");
+  if (!track || !viewport || !prevBtn || !nextBtn) return;
+
+  const cards = () => Array.from(track.children);
+  let index = 0;
+  let dragging = false;
+  let hasDragged = false;
+  let dragStartX = 0;
+  let dragBaseline = 0;
+
+  function getVisible() {
+    return parseInt(getComputedStyle(track).getPropertyValue("--visible"), 10) || 1;
+  }
+
+  function getStep() {
+    const first = cards()[0];
+    if (!first) return 0;
+    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || "0");
+    return first.getBoundingClientRect().width + gap;
+  }
+
+  function maxIndex() {
+    return Math.max(0, cards().length - getVisible());
+  }
+
+  function apply() {
+    track.style.transform = `translateX(${-(index * getStep())}px)`;
+  }
+
+  function update() {
+    index = Math.min(Math.max(index, 0), maxIndex());
+    apply();
+    prevBtn.disabled = index <= 0;
+    nextBtn.disabled = index >= maxIndex();
+  }
+
+  prevBtn.addEventListener("click", () => {
+    index -= 1;
+    update();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    index += 1;
+    update();
+  });
+
+  window.addEventListener("resize", () => update());
+
+  track.addEventListener("pointerdown", (event) => {
+    dragging = true;
+    hasDragged = false;
+    dragStartX = event.clientX;
+    dragBaseline = -(index * getStep());
+    track.style.transition = "none";
+    track.setPointerCapture(event.pointerId);
+  });
+
+  track.addEventListener("pointermove", (event) => {
+    if (!dragging) return;
+    const delta = event.clientX - dragStartX;
+    if (Math.abs(delta) > 6) hasDragged = true;
+    track.style.transform = `translateX(${dragBaseline + delta}px)`;
+  });
+
+  function endDrag(event) {
+    if (!dragging) return;
+    dragging = false;
+    track.style.transition = "";
+    const delta = event.clientX - dragStartX;
+    const step = getStep();
+    if (Math.abs(delta) > step * 0.2) {
+      index += delta < 0 ? 1 : -1;
+    }
+    update();
+    if (hasDragged) {
+      const suppressClick = (clickEvent) => {
+        clickEvent.preventDefault();
+        clickEvent.stopPropagation();
+      };
+      track.addEventListener("click", suppressClick, { capture: true, once: true });
+    }
+  }
+
+  track.addEventListener("pointerup", endDrag);
+  track.addEventListener("pointercancel", endDrag);
+
+  let wheelLock = false;
+  viewport.addEventListener(
+    "wheel",
+    (event) => {
+      if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+      event.preventDefault();
+      if (wheelLock) return;
+      wheelLock = true;
+      index += event.deltaX > 0 ? 1 : -1;
+      update();
+      setTimeout(() => {
+        wheelLock = false;
+      }, 350);
+    },
+    { passive: false }
+  );
+
+  update();
 }
 
 async function renderHighlightsFull() {
