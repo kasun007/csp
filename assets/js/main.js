@@ -58,7 +58,7 @@ const STRINGS = {
     decreaseQty: "ප්‍රමාණය අඩු කරන්න",
     increaseQty: "ප්‍රමාණය වැඩි කරන්න",
     cartTitle: "ඔබේ පොත් මල්ල",
-    cartEmpty: "පොත් මල්ල හිස. ආරම්භ කිරීමට ඉහත පොත් එකතු කරන්න.",
+    cartEmpty: "පොත් මල්ල හිස්. ආරම්භ කිරීමට ඉහත පොත් එකතු කරන්න.",
     cartRemove: "ඉවත් කරන්න",
     cartTotal: "එකතුව",
     cartAddressLabel: "බෙදාහැරීමේ ලිපිනය",

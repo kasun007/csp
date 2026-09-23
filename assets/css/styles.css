@@ -317,7 +317,7 @@ ul {
   font-family: var(--font-serif);
   font-size: 1.15rem;
   color: var(--color-ink);
-  text-align: left;
+  text-align: justify;
 }
 
 /* ---------- Essay section (asymmetric heading + flowing body) ---------- */
@@ -337,6 +337,10 @@ ul {
 
 .essay-body {
   max-width: 42rem;
+}
+
+.essay-body p {
+  text-align: justify;
 }
 
 .essay-pull-quote {
@@ -1517,6 +1521,10 @@ ul {
 
 .content-detail p {
   margin-bottom: 1.25em;
+}
+
+#course-detail p {
+  text-align: justify;
 }
 
 /* ---------- Footer ---------- */
