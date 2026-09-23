@@ -42,6 +42,7 @@ const STRINGS = {
     highlightsViewAll: "View All Highlights",
     highlightsBack: "All highlights",
     highlightsNotFound: "Highlight not found.",
+    highlightsExternalLink: "Read the full article",
   },
   si: {
     notFound: "පාඨමාලාව හමු නොවීය.",
@@ -74,6 +75,7 @@ const STRINGS = {
     highlightsViewAll: "සියලුම විශේෂාංග බලන්න",
     highlightsBack: "සියලුම විශේෂාංග",
     highlightsNotFound: "විශේෂාංගය හමු නොවීය.",
+    highlightsExternalLink: "සම්පූර්ණ ලිපිය කියවන්න",
   },
 };
 
@@ -507,6 +509,7 @@ async function renderHighlightDetail() {
     <h1>${item.title}</h1>
     <p class="meta">${item.dateLabel || item.date}</p>
     ${item.body.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+    ${item.externalUrl ? `<p><a href="${item.externalUrl}" target="_blank" rel="noopener noreferrer">${strings.highlightsExternalLink}</a></p>` : ""}
     <p><a href="${backHref}">${strings.highlightsBack}</a></p>`;
 }
 
