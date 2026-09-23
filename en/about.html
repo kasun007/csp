@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Serif+Sinhala:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=28">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=29">
 </head>
 <body>
   <!-- DRAFT TRANSLATION FROM SINHALA — please have a native speaker review -->
@@ -30,6 +30,27 @@
           <p>This is why Socrates says that an unexamined life is not worth living. Philosophy directs us to constantly examine our own lives. And that is precisely why it compels us to question the dominant ideas of society. It is here that the philosophical labor of studying books bears fruit. This is also why philosophy is an ideological struggle that changes society from the ground up.</p>
           <blockquote class="pull-quote essay-pull-quote">From savoring the beauty of a thought to social transformation &mdash; the Colombo School of Philosophy is a Sri Lankan workshop devoted to this.</blockquote>
         </div>
+      </div>
+    </section>
+
+    <section class="section essay-section">
+      <div class="container essay-grid">
+        <div class="essay-heading">
+          <h2>Our History</h2>
+        </div>
+        <div class="essay-body">
+          <p>Our journey began in 2012 as an informal, small study circle at the University of Colombo. Its aim was to introduce to our country a new philosophical thinking that moved beyond the doctrines that had become dominant in the 1990s. In place of thinkers like Derrida and Foucault, who had come to dominate the postmodern era, our goal was to bring into our country's discourse the new materialisms and realisms that had entered global conversation in the twenty-first century.</p>
+          <p>About a year later, this became somewhat more formal when it was reorganized under the Digital Film Academy, then housed at the Sri Lanka Foundation Institute. As a result, philosophical readings on cinema were also added to our studies. It was from this point that &ldquo;art&rdquo; became a central theme of our conversation.</p>
+          <p>It was also here that we began a close reading of both Ren&eacute; Descartes's Meditations and Martin Heidegger's Being and Time. This gave us room to develop a new format for reading such works in Sinhala. Since we felt that translating the original text directly into Sinhala would produce a work that was difficult to read, we instead tried to prepare a secondary text that explained every sentence of the original. Although this was clearly an interpretation, it became clear that it produced a text that was both closer to the original and easier to read. Since then, our studies have proceeded using this new format.</p>
+          <p>From the Sri Lanka Foundation Institute, our next home was the Theertha School of Arts. It was here, after finishing Heidegger's work, that we began that same kind of close reading for Kant's Critique of Pure Reason. Alongside Kant, we have also carried out various studies here on Derrida, &Zcaron;i&zcaron;ek, Badiou, and others.</p>
+          <p>After the &ldquo;Zoomification&rdquo; of the COVID-19 pandemic, we were finally officially organized as the Colombo School of Philosophy in 2024. Our effort to bring philosophy into life as a practice is now moving forward more formally than before. On one hand, we are trying to show the limits of the ideas of the anti-philosophers who came to dominate at the end of the twentieth century. On the other, we are trying to show the need for a new philosophical thinking. But more than all of this, what we are trying to show is the utmost joy of uncovering a philosophical thought. An examined life brings happiness. This is the most fundamental message of philosophy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section timeline-section">
+      <div class="container">
+        <div class="timeline" id="timeline-list"></div>
       </div>
     </section>
 
@@ -57,7 +78,22 @@
     </section>
   </main>
 
+  <div class="lightbox" id="timeline-lightbox" hidden>
+    <div class="lightbox-backdrop" data-lightbox-close></div>
+    <button class="lightbox-close" data-lightbox-close aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" data-lightbox-prev aria-label="Previous photograph">&larr;</button>
+    <figure class="lightbox-figure">
+      <img class="lightbox-image" src="" alt="">
+      <figcaption>
+        <span class="lightbox-year"></span>
+        <span class="lightbox-title"></span>
+        <p class="lightbox-description"></p>
+      </figcaption>
+    </figure>
+    <button class="lightbox-nav lightbox-next" data-lightbox-next aria-label="Next photograph">&rarr;</button>
+  </div>
+
   <div id="footer-placeholder"></div>
-  <script src="/assets/js/main.js?v=10"></script>
+  <script src="/assets/js/main.js?v=11"></script>
 </body>
 </html>

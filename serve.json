@@ -9,6 +9,8 @@
     { "source": "/en/books", "destination": "/en/books/index.html" },
     { "source": "/si/books", "destination": "/si/books/index.html" },
     { "source": "/en/videos", "destination": "/en/videos/index.html" },
-    { "source": "/si/videos", "destination": "/si/videos/index.html" }
+    { "source": "/si/videos", "destination": "/si/videos/index.html" },
+    { "source": "/en/highlights", "destination": "/en/highlights/index.html" },
+    { "source": "/si/highlights", "destination": "/si/highlights/index.html" }
   ]
 }

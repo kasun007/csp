@@ -24,17 +24,24 @@ const STRINGS = {
     addToCart: "Add to cart",
     decreaseQty: "Decrease quantity",
     increaseQty: "Increase quantity",
-    cartTitle: "Your Cart",
+    cartTitle: "Your Book Bag",
     cartEmpty: "Your cart is empty. Add books above to get started.",
     cartRemove: "Remove",
     cartTotal: "Total",
-    cartSlipLabel: "Select your payment slip",
-    cartSlipHint: "This isn't uploaded automatically — attach it yourself in the WhatsApp chat that opens.",
-    cartSlipChosen: "Selected:",
+    cartAddressLabel: "Delivery address",
+    cartAddressPlaceholder: "Enter your delivery address",
+    cartAddressPending: "(I'll add my delivery address in this chat)",
     cartCheckout: "Checkout on WhatsApp",
     cartWhatsappGreeting: "Hi CSP, I'd like to order the following books:",
     cartWhatsappTotal: "Total",
-    cartWhatsappClosing: "I'll attach my payment slip and delivery address in this chat.",
+    cartWhatsappAddress: "Delivery address",
+    cartWhatsappClosing: "I'll attach my payment slip in this chat.",
+    highlightsTitle: "Highlights",
+    highlightsIntro: "See what we've been doing lately.",
+    highlightsLatestBadge: "Latest",
+    highlightsViewAll: "View All Highlights",
+    highlightsBack: "All highlights",
+    highlightsNotFound: "Highlight not found.",
   },
   si: {
     notFound: "පාඨමාලාව හමු නොවීය.",
@@ -49,21 +56,29 @@ const STRINGS = {
     addToCart: "කරත්තයට එකතු කරන්න",
     decreaseQty: "ප්‍රමාණය අඩු කරන්න",
     increaseQty: "ප්‍රමාණය වැඩි කරන්න",
-    cartTitle: "ඔබේ කරත්තය",
-    cartEmpty: "ඔබේ කරත්තය හිස්ය. ආරම්භ කිරීමට ඉහත පොත් එකතු කරන්න.",
+    cartTitle: "ඔබේ පොත් බෑගය",
+    cartEmpty: "පොත් බෑගය හිස. ආරම්භ කිරීමට ඉහත පොත් එකතු කරන්න.",
     cartRemove: "ඉවත් කරන්න",
     cartTotal: "එකතුව",
-    cartSlipLabel: "ඔබේ ගෙවීම් රිසිට් පත තෝරන්න",
-    cartSlipHint: "මෙය ස්වයංක්‍රීයව එවනු නොලැබේ — විවෘත වන WhatsApp සංවාදයේදී එය ඔබම අමුණන්න.",
-    cartSlipChosen: "තෝරාගත්තේ:",
+    cartAddressLabel: "බෙදාහැරීමේ ලිපිනය",
+    cartAddressPlaceholder: "ඔබේ බෙදාහැරීමේ ලිපිනය ඇතුළත් කරන්න",
+    cartAddressPending: "(මම මගේ ලිපිනය මෙම සංවාදයට එක් කරන්නෙමි)",
     cartCheckout: "WhatsApp හරහා ඇණවුම කරන්න",
     cartWhatsappGreeting: "ආයුබෝවන් CSP, මට පහත පොත් ඇණවුම් කිරීමට අවශ්‍යයි:",
     cartWhatsappTotal: "එකතුව",
-    cartWhatsappClosing: "මම මගේ ගෙවීම් රිසිට් පත සහ බෙදාහැරීමේ ලිපිනය මෙම සංවාදයට අමුණන්නෙමි.",
+    cartWhatsappAddress: "බෙදාහැරීමේ ලිපිනය",
+    cartWhatsappClosing: "මම මගේ ගෙවීම් රිසිට් පත මෙම සංවාදයට අමුණන්නෙමි.",
+    highlightsTitle: "විශේෂාංග",
+    highlightsIntro: "අප මෑතකදී කළ දේ බලන්න.",
+    highlightsLatestBadge: "නවතම",
+    highlightsViewAll: "සියලුම විශේෂාංග බලන්න",
+    highlightsBack: "සියලුම විශේෂාංග",
+    highlightsNotFound: "විශේෂාංගය හමු නොවීය.",
   },
 };
 
 const CART_STORAGE_KEY = "csp-cart-v1";
+const CART_ADDRESS_KEY = "csp-cart-address-v1";
 const CART_WHATSAPP_NUMBER = "94712760993";
 
 function currentLocale() {
@@ -250,6 +265,14 @@ function saveCart(cart) {
   localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
 }
 
+function getCartAddress() {
+  return localStorage.getItem(CART_ADDRESS_KEY) || "";
+}
+
+function saveCartAddress(address) {
+  localStorage.setItem(CART_ADDRESS_KEY, address);
+}
+
 function setCartQty(slug, qty) {
   const cart = getCart();
   if (qty <= 0) {
@@ -279,14 +302,17 @@ function cartLineItems(books, cart) {
     .filter(Boolean);
 }
 
-function buildWhatsAppOrderUrl(items, total, locale) {
+function buildWhatsAppOrderUrl(items, total, address, locale) {
   const strings = STRINGS[locale] || STRINGS.en;
+  const addressLine = address.trim() || strings.cartAddressPending;
   const lines = [
     strings.cartWhatsappGreeting,
     "",
     ...items.map((item) => `- ${item.title} x${item.qty} — ${strings.currency} ${item.subtotal}`),
     "",
     `${strings.cartWhatsappTotal}: ${strings.currency} ${total}`,
+    "",
+    `${strings.cartWhatsappAddress}: ${addressLine}`,
     "",
     strings.cartWhatsappClosing,
   ];
@@ -318,17 +344,17 @@ function renderCartPanel(books, locale) {
     return;
   }
 
+  const address = getCartAddress();
+
   panel.innerHTML = `
     <h2>${strings.cartTitle}</h2>
     <div class="cart-items">${items.map((item) => cartItemRowHTML(item, strings)).join("")}</div>
     <div class="cart-total"><span>${strings.cartTotal}</span><span>${strings.currency} ${total}</span></div>
-    <div class="cart-slip">
-      <label for="cart-slip-input">${strings.cartSlipLabel}</label>
-      <input type="file" id="cart-slip-input" accept="image/*,.pdf">
-      <p class="cart-slip-hint">${strings.cartSlipHint}</p>
-      <p class="cart-slip-filename" id="cart-slip-filename"></p>
+    <div class="cart-address">
+      <label for="cart-address-input">${strings.cartAddressLabel}</label>
+      <textarea id="cart-address-input" rows="2" placeholder="${strings.cartAddressPlaceholder}">${address}</textarea>
     </div>
-    <a class="button cart-checkout-btn" id="cart-checkout-btn" href="${buildWhatsAppOrderUrl(items, total, locale)}" target="_blank" rel="noopener noreferrer">${strings.cartCheckout}</a>`;
+    <button type="button" class="button cart-checkout-btn" id="cart-checkout-btn">${strings.cartCheckout}</button>`;
 
   panel.querySelectorAll(".cart-item-remove").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -338,10 +364,12 @@ function renderCartPanel(books, locale) {
     });
   });
 
-  const slipInput = document.getElementById("cart-slip-input");
-  const slipFilename = document.getElementById("cart-slip-filename");
-  slipInput.addEventListener("change", () => {
-    slipFilename.textContent = slipInput.files[0] ? `${strings.cartSlipChosen} ${slipInput.files[0].name}` : "";
+  const addressInput = document.getElementById("cart-address-input");
+  addressInput.addEventListener("input", () => saveCartAddress(addressInput.value));
+
+  document.getElementById("cart-checkout-btn").addEventListener("click", () => {
+    const url = buildWhatsAppOrderUrl(items, total, addressInput.value, locale);
+    window.open(url, "_blank", "noopener,noreferrer");
   });
 }
 
@@ -395,6 +423,80 @@ async function renderVideoList() {
   const videos = await res.json();
 
   list.innerHTML = videos.map((video) => videoCardHTML(video)).join("");
+}
+
+const HIGHLIGHTS_HOME_LIMIT = 4;
+
+function sortHighlightsByDateDesc(items) {
+  return [...items].sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
+function highlightCardHTML(item, locale, isLatest) {
+  const strings = STRINGS[locale] || STRINGS.en;
+  const href = `/${locale}/highlights/highlight.html?slug=${encodeURIComponent(item.slug)}`;
+  return `
+    <div class="highlight-card${isLatest ? " highlight-card--latest" : ""}">
+      ${isLatest ? `<span class="highlight-badge">${strings.highlightsLatestBadge}</span>` : ""}
+      ${item.image ? `<div class="highlight-image"><img src="${item.image}" alt="${item.title}" loading="lazy"></div>` : ""}
+      <div class="highlight-body">
+        <span class="highlight-date">${item.dateLabel || item.date}</span>
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+        <a class="read-more" href="${href}">${strings.readMore}</a>
+      </div>
+    </div>`;
+}
+
+async function fetchHighlights(locale) {
+  const res = await fetch(`/assets/data/highlights.${locale}.json`, { cache: "no-store" });
+  if (!res.ok) return [];
+  return sortHighlightsByDateDesc(await res.json());
+}
+
+async function renderHighlightsHome() {
+  const list = document.getElementById("highlights-home-list");
+  if (!list) return;
+  const locale = currentLocale();
+  const items = await fetchHighlights(locale);
+
+  list.innerHTML = items
+    .slice(0, HIGHLIGHTS_HOME_LIMIT)
+    .map((item, index) => highlightCardHTML(item, locale, index === 0))
+    .join("");
+}
+
+async function renderHighlightsFull() {
+  const list = document.getElementById("highlights-full-list");
+  if (!list) return;
+  const locale = currentLocale();
+  const items = await fetchHighlights(locale);
+
+  list.innerHTML = items.map((item, index) => highlightCardHTML(item, locale, index === 0)).join("");
+}
+
+async function renderHighlightDetail() {
+  const el = document.getElementById("highlight-detail");
+  if (!el) return;
+  const locale = currentLocale();
+  const strings = STRINGS[locale] || STRINGS.en;
+  const slug = new URLSearchParams(window.location.search).get("slug");
+  const backHref = `/${locale}/highlights/index.html`;
+
+  const items = await fetchHighlights(locale);
+  const item = items.find((h) => h.slug === slug);
+
+  if (!item) {
+    el.innerHTML = `<p>${strings.highlightsNotFound}</p><p><a href="${backHref}">${strings.highlightsBack}</a></p>`;
+    return;
+  }
+
+  document.title = `${item.title} — Colombo School of Philosophy`;
+  el.innerHTML = `
+    ${item.image ? `<div class="detail-photo"><img src="${item.image}" alt="${item.title}"></div>` : ""}
+    <h1>${item.title}</h1>
+    <p class="meta">${item.dateLabel || item.date}</p>
+    ${item.body.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+    <p><a href="${backHref}">${strings.highlightsBack}</a></p>`;
 }
 
 function descriptionParagraphsHTML(description) {
@@ -568,6 +670,9 @@ async function init() {
   await renderCourseDetail();
   await renderBookList();
   await renderVideoList();
+  await renderHighlightsHome();
+  await renderHighlightsFull();
+  await renderHighlightDetail();
   await renderTimeline();
   wireFilterPills();
 }
