@@ -1,50 +1,14 @@
 [
   {
-    "slug": "artistic-object-reality",
-    "title": "\"The Reality of the Artistic Object\"",
-    "description": "Our newest publication, offering a critical introduction to Graham Harman's philosophy.",
-    "date": "2026-01-15",
-    "dateLabel": "15 January 2026",
-    "image": "/assets/img/images/2026.jpeg",
-    "body": [
-      "\"The Reality of the Artistic Object,\" written by Vangeesa Sumanasekara as a critical introduction to Graham Harman's philosophy, has just been released.",
-      "This is another step in our long-term project of introducing the newest developments in Object-Oriented Ontology to Sinhala readers."
-    ]
-  },
-  {
-    "slug": "inaugural-ceremony",
-    "title": "Colombo School of Philosophy Inaugural Ceremony",
-    "description": "Our official inaugural ceremony was held at the Mahaweli Centre.",
+    "slug": "founding-day-remarks-wangeesa",
+    "title": "Vangeesa Sumanasekara's Remarks on CSP's Founding Day",
+    "description": "Vangeesa Sumanasekara's remarks on CSP's founding day.",
     "date": "2025-06-10",
     "dateLabel": "10 June 2025",
-    "image": "/assets/img/images/2025.jpeg",
+    "youtubeId": "_qR_Pn8c8mI",
+    "start": 243,
     "body": [
-      "After nearly a decade of informal work, the Colombo School of Philosophy was officially inaugurated at a ceremony held at the Mahaweli Centre.",
-      "The event was attended by students, lecturers, and long-time collaborators. Our vision for the years ahead, under the motto &ldquo;Beyond the 90s,&rdquo; was announced at this occasion."
-    ]
-  },
-  {
-    "slug": "politics-of-universality-launch",
-    "title": "\"The Politics of Universality\" Launch",
-    "description": "A new book by Ranga Manupriya, Waranga de Silva, and Vangeesa Sumanasekara.",
-    "date": "2024-11-02",
-    "dateLabel": "02 November 2024",
-    "image": "/assets/img/images/2024.jpeg",
-    "body": [
-      "\"The Politics of Universality,\" which examines the origin, promise, and crisis of the liberatory self, was launched at the Colombo International Book Fair 2024.",
-      "The book, co-authored by Ranga Manupriya, Waranga de Silva, and Vangeesa Sumanasekara, was published by Agahas Publications."
-    ]
-  },
-  {
-    "slug": "discussions-on-theism",
-    "title": "Discussions on Theism",
-    "description": "An open series of discussions on theism and religious philosophy.",
-    "date": "2023-08-20",
-    "dateLabel": "20 August 2023",
-    "image": "/assets/img/images/2023.jpeg",
-    "body": [
-      "An open series of discussions on theism and religious philosophy was held through CSP's reading circles.",
-      "These discussions offered a critical examination of both classical and contemporary arguments for theism."
+      "Vangeesa Sumanasekara's remarks on CSP's founding day."
     ]
   }
 ]

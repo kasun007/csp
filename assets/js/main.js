@@ -431,13 +431,24 @@ function sortHighlightsByDateDesc(items) {
   return [...items].sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
+function highlightMediaHTML(item, className) {
+  if (item.youtubeId) {
+    const src = `https://www.youtube.com/embed/${item.youtubeId}${item.start ? `?start=${item.start}` : ""}`;
+    return `<div class="${className} ${className}--video"><iframe src="${src}" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" allowfullscreen></iframe></div>`;
+  }
+  if (item.image) {
+    return `<div class="${className}"><img src="${item.image}" alt="${item.title}" loading="lazy"></div>`;
+  }
+  return "";
+}
+
 function highlightCardHTML(item, locale, isLatest) {
   const strings = STRINGS[locale] || STRINGS.en;
   const href = `/${locale}/highlights/highlight.html?slug=${encodeURIComponent(item.slug)}`;
   return `
     <div class="highlight-card${isLatest ? " highlight-card--latest" : ""}">
       ${isLatest ? `<span class="highlight-badge">${strings.highlightsLatestBadge}</span>` : ""}
-      ${item.image ? `<div class="highlight-image"><img src="${item.image}" alt="${item.title}" loading="lazy"></div>` : ""}
+      ${highlightMediaHTML(item, "highlight-image")}
       <div class="highlight-body">
         <span class="highlight-date">${item.dateLabel || item.date}</span>
         <h3>${item.title}</h3>
@@ -492,7 +503,7 @@ async function renderHighlightDetail() {
 
   document.title = `${item.title} — Colombo School of Philosophy`;
   el.innerHTML = `
-    ${item.image ? `<div class="detail-photo"><img src="${item.image}" alt="${item.title}"></div>` : ""}
+    ${highlightMediaHTML(item, "detail-photo")}
     <h1>${item.title}</h1>
     <p class="meta">${item.dateLabel || item.date}</p>
     ${item.body.map((paragraph) => `<p>${paragraph}</p>`).join("")}
