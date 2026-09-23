@@ -430,16 +430,21 @@ ul {
 
 /* ---------- Highlights ---------- */
 .highlight-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 22rem));
+  display: flex;
+  flex-wrap: nowrap;
   justify-content: center;
   gap: 2rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
 }
 
 .highlight-card {
   position: relative;
   display: flex;
   flex-direction: column;
+  flex: 1 1 18rem;
+  max-width: 22rem;
+  min-width: 16rem;
   border: 1px solid var(--color-border);
   background: var(--color-surface);
   overflow: hidden;
