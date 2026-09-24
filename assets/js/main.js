@@ -9,6 +9,8 @@
  */
 
 const LOCALES = ["en", "si"];
+const SITE_URL = "https://sandybrown-boar-370318.hostingersite.com";
+const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/brand/favicon-512.png?v=2`;
 
 const STRINGS = {
   en: {
@@ -128,6 +130,70 @@ function wireLocaleSwitcher() {
   });
 }
 
+function upsertMetaTag(attr, key, content) {
+  let el = document.head.querySelector(`meta[${attr}="${key}"]`);
+  if (!el) {
+    el = document.createElement("meta");
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("content", content);
+}
+
+function upsertLinkTag(rel, href) {
+  let el = document.head.querySelector(`link[rel="${rel}"]`);
+  if (!el) {
+    el = document.createElement("link");
+    el.setAttribute("rel", rel);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("href", href);
+}
+
+function setDynamicSeo({ title, description, path, image }) {
+  const url = `${SITE_URL}${path}`;
+  document.title = title;
+  upsertLinkTag("canonical", url);
+  upsertMetaTag("name", "description", description);
+  upsertMetaTag("property", "og:title", title);
+  upsertMetaTag("property", "og:description", description);
+  upsertMetaTag("property", "og:url", url);
+  upsertMetaTag("property", "og:image", image || DEFAULT_OG_IMAGE);
+  upsertMetaTag("name", "twitter:title", title);
+  upsertMetaTag("name", "twitter:description", description);
+  upsertMetaTag("name", "twitter:image", image || DEFAULT_OG_IMAGE);
+}
+
+function setCourseStructuredData(course, locale) {
+  const existing = document.getElementById("course-structured-data");
+  if (existing) existing.remove();
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.id = "course-structured-data";
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: course.title,
+    description: course.summary,
+    provider: {
+      "@type": "EducationalOrganization",
+      name: "Colombo School of Philosophy",
+      sameAs: SITE_URL,
+    },
+    inLanguage: locale,
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: course.format,
+      startDate: course.startDate,
+      location: {
+        "@type": "Place",
+        name: course.location,
+      },
+    },
+  });
+  document.head.appendChild(script);
+}
+
 function wireFilterPills() {
   document.querySelectorAll(".filter-pills").forEach((group) => {
     const grid = group.nextElementSibling;
@@ -224,7 +290,13 @@ async function renderCourseDetail() {
     return;
   }
 
-  document.title = `${course.title} — Colombo School of Philosophy`;
+  setDynamicSeo({
+    title: `${course.title} — Colombo School of Philosophy`,
+    description: course.summary,
+    path: `/${locale}/courses/course.html?slug=${encodeURIComponent(course.slug)}`,
+    image: course.image ? `${SITE_URL}${course.image}` : undefined,
+  });
+  setCourseStructuredData(course, locale);
   el.innerHTML = `
     ${course.image ? `<div class="detail-photo"><img src="${course.image}" alt=""></div>` : ""}
     <h1>${course.title}</h1>
@@ -610,7 +682,12 @@ async function renderHighlightDetail() {
     return;
   }
 
-  document.title = `${item.title} — Colombo School of Philosophy`;
+  setDynamicSeo({
+    title: `${item.title} — Colombo School of Philosophy`,
+    description: item.description,
+    path: `/${locale}/highlights/highlight.html?slug=${encodeURIComponent(item.slug)}`,
+    image: item.image ? `${SITE_URL}${item.image}` : undefined,
+  });
   el.innerHTML = `
     ${highlightMediaHTML(item, "detail-photo")}
     <h1>${item.title}</h1>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sandybrown-boar-370318.hostingersite.com/sitemap.xml
