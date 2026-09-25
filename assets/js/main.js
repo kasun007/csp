@@ -45,6 +45,7 @@ const STRINGS = {
     highlightsBack: "All features",
     highlightsNotFound: "Feature not found.",
     highlightsExternalLink: "Read the full article",
+    visitorCountSuffix: "visits",
   },
   si: {
     notFound: "පාඨමාලාව හමු නොවීය.",
@@ -78,6 +79,7 @@ const STRINGS = {
     highlightsBack: "සියලුම විශේෂාංග",
     highlightsNotFound: "විශේෂාංගය හමු නොවීය.",
     highlightsExternalLink: "සම්පූර්ණ ලිපිය කියවන්න",
+    visitorCountSuffix: "පිවිසුම්",
   },
 };
 
@@ -884,6 +886,21 @@ async function renderTimeline() {
   wireTimelineLightbox(list, imageItems);
 }
 
+async function renderVisitorCounter() {
+  const el = document.getElementById("visitor-count");
+  if (!el) return;
+  const locale = currentLocale();
+  const strings = STRINGS[locale] || STRINGS.en;
+  try {
+    const res = await fetch("https://abacus.jasoncameron.dev/hit/csplk/site-visits");
+    if (!res.ok) return;
+    const data = await res.json();
+    el.textContent = `${data.value.toLocaleString(locale === "si" ? "si-LK" : "en-US")} ${strings.visitorCountSuffix}`;
+  } catch {
+    // Third-party counter unreachable - leave the widget blank rather than show an error.
+  }
+}
+
 async function init() {
   const locale = currentLocale();
   await Promise.all([
@@ -893,6 +910,7 @@ async function init() {
   wireMobileNavToggle();
   wireLocaleSwitcher();
   highlightActiveLink();
+  renderVisitorCounter();
   await renderCourseList();
   await renderCourseDetail();
   await renderBookList();

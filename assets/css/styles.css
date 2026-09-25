@@ -1663,6 +1663,11 @@ ul {
   color: rgba(244, 239, 225, 0.6);
 }
 
+.visitor-count:not(:empty)::before {
+  content: "\00b7";
+  margin: 0 0.4em;
+}
+
 /* ---------- Responsive nav ---------- */
 @media (max-width: 42rem) {
   .nav-toggle {
