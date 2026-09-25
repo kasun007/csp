@@ -9,7 +9,7 @@
  */
 
 const LOCALES = ["en", "si"];
-const SITE_URL = "https://sandybrown-boar-370318.hostingersite.com";
+const SITE_URL = "https://csp.lk";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/brand/favicon-512.png?v=2`;
 
 const STRINGS = {
