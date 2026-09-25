@@ -194,6 +194,25 @@ function setCourseStructuredData(course, locale) {
   document.head.appendChild(script);
 }
 
+function setBreadcrumbJsonLd(items) {
+  const existing = document.getElementById("breadcrumb-structured-data");
+  if (existing) existing.remove();
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.id = "breadcrumb-structured-data";
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path}`,
+    })),
+  });
+  document.head.appendChild(script);
+}
+
 function wireFilterPills() {
   document.querySelectorAll(".filter-pills").forEach((group) => {
     const grid = group.nextElementSibling;
@@ -219,7 +238,7 @@ function courseEntryRowHTML(course, locale) {
   return `
     <div class="entry-row entry-row--linked" data-category="${course.category}">
       <div class="entry-summary-main">
-        ${course.image ? `<img class="entry-thumb" src="${course.image}" alt="">` : ""}
+        ${course.image ? `<img class="entry-thumb" src="${course.image}" alt="${course.title}">` : ""}
         <div>
           <h3>${course.title}</h3>
           <p>${course.summary}</p>
@@ -297,8 +316,13 @@ async function renderCourseDetail() {
     image: course.image ? `${SITE_URL}${course.image}` : undefined,
   });
   setCourseStructuredData(course, locale);
+  setBreadcrumbJsonLd([
+    { name: locale === "si" ? "මුල් පිටුව" : "Home", path: `/${locale}/index.html` },
+    { name: locale === "si" ? "පාඨමාලා" : "Courses", path: `/${locale}/courses/index.html` },
+    { name: course.title, path: `/${locale}/courses/course.html?slug=${encodeURIComponent(course.slug)}` },
+  ]);
   el.innerHTML = `
-    ${course.image ? `<div class="detail-photo"><img src="${course.image}" alt=""></div>` : ""}
+    ${course.image ? `<div class="detail-photo"><img src="${course.image}" alt="${course.title}"></div>` : ""}
     <h1>${course.title}</h1>
     <p class="meta">${course.duration} &middot; ${course.format}</p>
     <p class="meta">${strings.starts} ${course.startDate} &middot; ${course.startTime}</p>
@@ -688,6 +712,11 @@ async function renderHighlightDetail() {
     path: `/${locale}/highlights/highlight.html?slug=${encodeURIComponent(item.slug)}`,
     image: item.image ? `${SITE_URL}${item.image}` : undefined,
   });
+  setBreadcrumbJsonLd([
+    { name: locale === "si" ? "මුල් පිටුව" : "Home", path: `/${locale}/index.html` },
+    { name: locale === "si" ? "විශේෂාංග" : "Features", path: `/${locale}/highlights/index.html` },
+    { name: item.title, path: `/${locale}/highlights/highlight.html?slug=${encodeURIComponent(item.slug)}` },
+  ]);
   el.innerHTML = `
     ${highlightMediaHTML(item, "detail-photo")}
     <h1>${item.title}</h1>
