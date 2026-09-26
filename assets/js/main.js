@@ -724,6 +724,7 @@ async function renderHighlightDetail() {
     <h1>${item.title}</h1>
     <p class="meta">${item.dateLabel || item.date}</p>
     ${item.body.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+    ${item.gallery ? `<div class="highlight-gallery">${item.gallery.map((src) => `<a href="${src}" target="_blank" rel="noopener noreferrer"><img src="${src}" alt="${item.title}" loading="lazy"></a>`).join("")}</div>` : ""}
     ${item.externalUrl ? `<p><a href="${item.externalUrl}" target="_blank" rel="noopener noreferrer">${strings.highlightsExternalLink}</a></p>` : ""}
     <p><a href="${backHref}">${strings.highlightsBack}</a></p>`;
 }
