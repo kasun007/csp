@@ -565,7 +565,7 @@ ul {
 .highlight-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .highlight-gallery img {
