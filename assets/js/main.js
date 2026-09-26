@@ -631,13 +631,15 @@ function initHighlightsCarousel(root) {
     dragStartX = event.clientX;
     dragBaseline = -(index * getStep());
     track.style.transition = "none";
-    track.setPointerCapture(event.pointerId);
   });
 
   track.addEventListener("pointermove", (event) => {
     if (!dragging) return;
     const delta = event.clientX - dragStartX;
-    if (Math.abs(delta) > 6) hasDragged = true;
+    if (Math.abs(delta) > 6) {
+      if (!hasDragged) track.setPointerCapture(event.pointerId);
+      hasDragged = true;
+    }
     track.style.transform = `translateX(${dragBaseline + delta}px)`;
   });
 
