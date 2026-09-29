@@ -1,7 +1,7 @@
 [
   {
     "slug": "philosophical-journal",
-    "title": "Philosophical Journal",
+    "title": "Philosophical Papers",
     "subtitle": "History, Contemporaneity, Sri Lankan-ness",
     "author": "Edited by Ranga Manupriya",
     "price": 1650,
@@ -9,7 +9,7 @@
   },
   {
     "slug": "being-and-thinking",
-    "title": "Being and Thinking",
+    "title": "Being and Thought",
     "subtitle": "",
     "author": "Vangeesa Sumanasekara",
     "price": 950,
@@ -17,7 +17,7 @@
   },
   {
     "slug": "alternative-introduction",
-    "title": "Introduction to an Alternative Nalinism",
+    "title": "An Introduction to an Alternative Nalinism",
     "subtitle": "",
     "author": "Vangeesa Sumanasekara",
     "price": 500,
@@ -25,7 +25,7 @@
   },
   {
     "slug": "politics-of-universality",
-    "title": "The Politics of Universality",
+    "title": "Politics of Universality",
     "subtitle": "The Origin, Promise, and Crisis of the Liberatory Self",
     "author": "Ranga Manupriya, Waranga de Silva, Vangeesa Sumanasekara",
     "price": 950,
