@@ -32,6 +32,14 @@
     "image": "/assets/img/books/politics-of-universality.jpeg"
   },
   {
+    "slug": "realness-of-the-artistic-object",
+    "title": "The Realness of the Artistic Object",
+    "subtitle": "A Critical Introduction to Graham Harman's Philosophy",
+    "author": "Vangeesa Sumanasekara",
+    "price": 1100,
+    "image": "/assets/img/books/realness-of-the-artistic-object.jpeg"
+  },
+  {
     "slug": "after-finitude",
     "title": "After Finitude",
     "subtitle": "An Essay on the Necessity of Contingency",

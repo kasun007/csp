@@ -32,6 +32,14 @@
     "image": "/assets/img/books/politics-of-universality.jpeg"
   },
   {
+    "slug": "realness-of-the-artistic-object",
+    "title": "කලාත්මක වස්තුවේ සැබෑ බව",
+    "subtitle": "ග්‍රැහැම් හාමන්ගේ දර්ශනයට විචාරාත්මක හැඳින්වීමක්",
+    "author": "වංගීස සුමනසේකර",
+    "price": 1100,
+    "image": "/assets/img/books/realness-of-the-artistic-object.jpeg"
+  },
+  {
     "slug": "after-finitude",
     "title": "පරිමිතත්වයෙන් පසු",
     "subtitle": "අහඹුවේ අනිවාර්යතාව පිළිබඳ රචනයක්",
