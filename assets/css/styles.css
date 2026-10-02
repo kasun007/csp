@@ -136,7 +136,7 @@ ul {
 .main-nav {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
+  gap: 1.25rem;
   flex-wrap: wrap;
 }
 
