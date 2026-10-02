@@ -974,11 +974,21 @@ ul {
   text-decoration: underline;
 }
 
+.cart-postage {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
 .cart-total {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
-  padding-top: 1rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
   border-top: 2px solid var(--color-border);
   font-family: var(--font-serif);
   font-weight: 600;

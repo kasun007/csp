@@ -29,12 +29,14 @@ const STRINGS = {
     cartTitle: "Your Cart",
     cartEmpty: "Your cart is empty. Add books above to get started.",
     cartRemove: "Remove",
+    cartPostage: "Postage fee",
     cartTotal: "Total",
     cartAddressLabel: "Delivery address",
     cartAddressPlaceholder: "Enter your delivery address",
     cartAddressPending: "(I'll add my delivery address in this chat)",
     cartCheckout: "Checkout on WhatsApp",
     cartWhatsappGreeting: "Hi CSP, I'd like to order the following books:",
+    cartWhatsappPostage: "Postage fee",
     cartWhatsappTotal: "Total",
     cartWhatsappAddress: "Delivery address",
     cartWhatsappClosing: "I'll attach my payment slip in this chat.",
@@ -63,12 +65,14 @@ const STRINGS = {
     cartTitle: "ඔබේ පොත් මල්ල",
     cartEmpty: "පොත් මල්ල හිස්. ආරම්භ කිරීමට ඉහත පොත් එකතු කරන්න.",
     cartRemove: "ඉවත් කරන්න",
+    cartPostage: "තැපැල් ගාස්තුව",
     cartTotal: "එකතුව",
     cartAddressLabel: "බෙදාහැරීමේ ලිපිනය",
     cartAddressPlaceholder: "ඔබේ බෙදාහැරීමේ ලිපිනය ඇතුළත් කරන්න",
     cartAddressPending: "(මම මගේ ලිපිනය මෙම සංවාදයට එක් කරන්නෙමි)",
     cartCheckout: "WhatsApp හරහා ඇණවුම කරන්න",
     cartWhatsappGreeting: "ආයුබෝවන් CSP, මට පහත පොත් ඇණවුම් කිරීමට අවශ්‍යයි:",
+    cartWhatsappPostage: "තැපැල් ගාස්තුව",
     cartWhatsappTotal: "එකතුව",
     cartWhatsappAddress: "බෙදාහැරීමේ ලිපිනය",
     cartWhatsappClosing: "මම මගේ ගෙවීම් රිසිට් පත මෙම සංවාදයට අමුණන්නෙමි.",
@@ -86,6 +90,7 @@ const STRINGS = {
 const CART_STORAGE_KEY = "csp-cart-v1";
 const CART_ADDRESS_KEY = "csp-cart-address-v1";
 const CART_WHATSAPP_NUMBER = "94712760993";
+const POSTAGE_PER_BOOK = 300;
 
 function currentLocale() {
   const seg = window.location.pathname.split("/").filter(Boolean)[0];
@@ -402,7 +407,7 @@ function cartLineItems(books, cart) {
     .filter(Boolean);
 }
 
-function buildWhatsAppOrderUrl(items, total, address, locale) {
+function buildWhatsAppOrderUrl(items, postage, total, address, locale) {
   const strings = STRINGS[locale] || STRINGS.en;
   const addressLine = address.trim() || strings.cartAddressPending;
   const lines = [
@@ -410,6 +415,7 @@ function buildWhatsAppOrderUrl(items, total, address, locale) {
     "",
     ...items.map((item) => `- ${item.title} x${item.qty} — ${strings.currency} ${item.subtotal}`),
     "",
+    `${strings.cartWhatsappPostage}: ${strings.currency} ${postage}`,
     `${strings.cartWhatsappTotal}: ${strings.currency} ${total}`,
     "",
     `${strings.cartWhatsappAddress}: ${addressLine}`,
@@ -435,7 +441,10 @@ function renderCartPanel(books, locale) {
   const strings = STRINGS[locale] || STRINGS.en;
   const cart = getCart();
   const items = cartLineItems(books, cart);
-  const total = items.reduce((sum, item) => sum + item.subtotal, 0);
+  const subtotal = items.reduce((sum, item) => sum + item.subtotal, 0);
+  const bookCount = items.reduce((sum, item) => sum + item.qty, 0);
+  const postage = bookCount * POSTAGE_PER_BOOK;
+  const total = subtotal + postage;
 
   if (items.length === 0) {
     panel.innerHTML = `
@@ -449,6 +458,7 @@ function renderCartPanel(books, locale) {
   panel.innerHTML = `
     <h2>${strings.cartTitle}</h2>
     <div class="cart-items">${items.map((item) => cartItemRowHTML(item, strings)).join("")}</div>
+    <div class="cart-postage"><span>${strings.cartPostage}</span><span>${strings.currency} ${postage}</span></div>
     <div class="cart-total"><span>${strings.cartTotal}</span><span>${strings.currency} ${total}</span></div>
     <div class="cart-address">
       <label for="cart-address-input">${strings.cartAddressLabel}</label>
@@ -468,7 +478,7 @@ function renderCartPanel(books, locale) {
   addressInput.addEventListener("input", () => saveCartAddress(addressInput.value));
 
   document.getElementById("cart-checkout-btn").addEventListener("click", () => {
-    const url = buildWhatsAppOrderUrl(items, total, addressInput.value, locale);
+    const url = buildWhatsAppOrderUrl(items, postage, total, addressInput.value, locale);
     window.open(url, "_blank", "noopener,noreferrer");
   });
 }
