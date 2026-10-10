@@ -48,6 +48,9 @@ const STRINGS = {
     highlightsNotFound: "Feature not found.",
     highlightsExternalLink: "Read the full article",
     visitorCountSuffix: "visits",
+    blogNotFound: "Post not found.",
+    backToBlog: "All posts",
+    byLabel: "By",
   },
   si: {
     notFound: "පාඨමාලාව හමු නොවීය.",
@@ -84,6 +87,9 @@ const STRINGS = {
     highlightsNotFound: "විශේෂාංගය හමු නොවීය.",
     highlightsExternalLink: "සම්පූර්ණ ලිපිය කියවන්න",
     visitorCountSuffix: "පිවිසුම්",
+    blogNotFound: "ලිපිය හමු නොවීය.",
+    backToBlog: "සියලුම ලිපි",
+    byLabel: "විසින්",
   },
 };
 
@@ -338,6 +344,100 @@ async function renderCourseDetail() {
     ${course.fee ? `<p class="meta">${strings.fee}: ${course.fee}</p>` : ""}
     ${course.description.map((paragraph) => `<p>${paragraph}</p>`).join("")}
     <p><a href="${backHref}">${strings.backToCourses}</a></p>`;
+}
+
+function blogEntryRowHTML(post, locale) {
+  const strings = STRINGS[locale] || STRINGS.en;
+  const href = `/${locale}/blog/post.html?slug=${encodeURIComponent(post.slug)}`;
+  return `
+    <div class="entry-row entry-row--linked" data-category="${post.category}">
+      <div class="entry-summary-main">
+        ${post.image ? `<img class="entry-thumb" src="${post.image}" alt="${post.title}">` : ""}
+        <div>
+          <h3>${post.title}</h3>
+          <p>${post.summary}</p>
+          <p><a class="read-more" href="${href}">${strings.readMore}</a></p>
+        </div>
+      </div>
+      <div class="entry-meta">
+        <div class="meta-row">
+          <span><svg class="icon meta-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 9h18M8 3v4m8-4v4"/></svg> ${post.dateLabel}</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+async function renderBlogList() {
+  const list = document.getElementById("blog-list");
+  if (!list) return;
+  const locale = currentLocale();
+
+  const res = await fetch(`/assets/data/blog.${locale}.json`, { cache: "no-store" });
+  if (!res.ok) return;
+  const posts = sortHighlightsByDateDesc(await res.json());
+
+  const filters = document.getElementById("blog-filters");
+  if (filters) {
+    const seen = new Set();
+    const categories = [];
+    posts.forEach((post) => {
+      if (!seen.has(post.category)) {
+        seen.add(post.category);
+        categories.push({ category: post.category, label: post.categoryLabel });
+      }
+    });
+    const pillsHTML = categories
+      .map((c, i) => `<button class="filter-pill${i === 0 ? " active" : ""}" data-filter="${c.category}">${c.label}</button>`)
+      .join("");
+    filters.innerHTML = pillsHTML;
+  }
+
+  list.innerHTML = posts.map((post) => blogEntryRowHTML(post, locale)).join("");
+
+  if (filters) {
+    const defaultFilter = filters.querySelector(".filter-pill")?.dataset.filter;
+    if (defaultFilter) {
+      list.querySelectorAll("[data-category]").forEach((card) => {
+        card.style.display = card.dataset.category === defaultFilter ? "" : "none";
+      });
+    }
+  }
+}
+
+async function renderBlogDetail() {
+  const el = document.getElementById("blog-detail");
+  if (!el) return;
+  const locale = currentLocale();
+  const strings = STRINGS[locale] || STRINGS.en;
+  const slug = new URLSearchParams(window.location.search).get("slug");
+  const backHref = `/${locale}/blog/index.html`;
+
+  const res = await fetch(`/assets/data/blog.${locale}.json`, { cache: "no-store" });
+  const posts = res.ok ? await res.json() : [];
+  const post = posts.find((p) => p.slug === slug);
+
+  if (!post) {
+    el.innerHTML = `<p>${strings.blogNotFound}</p><p><a href="${backHref}">${strings.backToBlog}</a></p>`;
+    return;
+  }
+
+  setDynamicSeo({
+    title: `${post.title} — Colombo School of Philosophy`,
+    description: post.summary,
+    path: `/${locale}/blog/post.html?slug=${encodeURIComponent(post.slug)}`,
+    image: post.image ? `${SITE_URL}${post.image}` : undefined,
+  });
+  setBreadcrumbJsonLd([
+    { name: locale === "si" ? "මුල් පිටුව" : "Home", path: `/${locale}/index.html` },
+    { name: locale === "si" ? "බ්ලොග්" : "Blog", path: `/${locale}/blog/index.html` },
+    { name: post.title, path: `/${locale}/blog/post.html?slug=${encodeURIComponent(post.slug)}` },
+  ]);
+  el.innerHTML = `
+    ${post.image ? `<div class="detail-photo"><img src="${post.image}" alt="${post.title}"></div>` : ""}
+    <h1>${post.title}</h1>
+    <p class="meta">${post.dateLabel}${post.author ? ` &middot; ${strings.byLabel} ${post.author}` : ""}</p>
+    ${post.body.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+    <p><a href="${backHref}">${strings.backToBlog}</a></p>`;
 }
 
 function bookCardHTML(book, locale) {
@@ -926,6 +1026,8 @@ async function init() {
   renderVisitorCounter();
   await renderCourseList();
   await renderCourseDetail();
+  await renderBlogList();
+  await renderBlogDetail();
   await renderBookList();
   await renderVideoList();
   await renderHighlightsHome();
