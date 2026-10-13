@@ -550,6 +550,13 @@ ul {
   border-radius: var(--radius);
 }
 
+.highlight-badge--inline {
+  position: static;
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 0.2rem;
+}
+
 .highlight-image {
   aspect-ratio: 16 / 9;
   overflow: hidden;

@@ -553,11 +553,13 @@ function highlightMediaHTML(item, className) {
 function highlightCardHTML(item, locale, isLatest) {
   const strings = STRINGS[locale] || STRINGS.en;
   const href = `/${locale}/highlights/highlight.html?slug=${encodeURIComponent(item.slug)}`;
+  const media = highlightMediaHTML(item, "highlight-image");
   return `
     <div class="highlight-card${isLatest ? " highlight-card--latest" : ""}">
-      ${isLatest ? `<span class="highlight-badge">${strings.highlightsLatestBadge}</span>` : ""}
-      ${highlightMediaHTML(item, "highlight-image")}
+      ${isLatest && media ? `<span class="highlight-badge">${strings.highlightsLatestBadge}</span>` : ""}
+      ${media}
       <div class="highlight-body">
+        ${isLatest && !media ? `<span class="highlight-badge highlight-badge--inline">${strings.highlightsLatestBadge}</span>` : ""}
         <span class="highlight-date">${item.dateLabel || item.date}</span>
         <h3>${item.title}</h3>
         <p>${item.description}</p>
