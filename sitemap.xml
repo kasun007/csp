@@ -72,34 +72,6 @@
     <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/courses/index.html"/>
   </url>
   <url>
-    <loc>https://csp.lk/en/blog/index.html</loc>
-    <lastmod>2026-10-10</lastmod>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/index.html"/>
-    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/index.html"/>
-  </url>
-  <url>
-    <loc>https://csp.lk/si/blog/index.html</loc>
-    <lastmod>2026-10-10</lastmod>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/index.html"/>
-    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/index.html"/>
-  </url>
-  <url>
-    <loc>https://csp.lk/en/blog/post.html?slug=welcome-to-our-blog</loc>
-    <lastmod>2026-10-10</lastmod>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/post.html?slug=welcome-to-our-blog"/>
-    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/post.html?slug=welcome-to-our-blog"/>
-  </url>
-  <url>
-    <loc>https://csp.lk/si/blog/post.html?slug=welcome-to-our-blog</loc>
-    <lastmod>2026-10-10</lastmod>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/post.html?slug=welcome-to-our-blog"/>
-    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/post.html?slug=welcome-to-our-blog"/>
-  </url>
-  <url>
     <loc>https://csp.lk/en/books/index.html</loc>
     <lastmod>2026-09-24</lastmod>
     <priority>0.7</priority>

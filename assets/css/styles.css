@@ -1546,8 +1546,7 @@ ul {
   margin-bottom: 1.25em;
 }
 
-#course-detail p,
-#blog-detail p {
+#course-detail p {
   text-align: justify;
 }
 
