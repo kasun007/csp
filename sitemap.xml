@@ -198,12 +198,21 @@
     <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/highlights/highlight.html?slug=book-launch-2026"/>
   </url>
   <url>
-    <loc>https://csp.lk/si/highlights/highlight.html?slug=emperor-may-sleep-review</loc>
+    <loc>https://csp.lk/en/highlights/highlight.html?slug=our-new-video</loc>
     <lastmod>2026-10-20</lastmod>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/highlights/highlight.html?slug=our-new-video"/>
+    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/highlights/highlight.html?slug=our-new-video"/>
   </url>
   <url>
     <loc>https://csp.lk/si/highlights/highlight.html?slug=our-new-video</loc>
+    <lastmod>2026-10-20</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/highlights/highlight.html?slug=our-new-video"/>
+    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/highlights/highlight.html?slug=our-new-video"/>
+  </url>
+  <url>
+    <loc>https://csp.lk/si/highlights/highlight.html?slug=emperor-may-sleep-review</loc>
     <lastmod>2026-10-20</lastmod>
     <priority>0.6</priority>
   </url>

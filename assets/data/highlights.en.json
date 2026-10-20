@@ -70,5 +70,17 @@
     "body": [
       "On August 25, 2026, the Colombo School of Philosophy officially launched its latest publication. Here are a few key moments captured during the event."
     ]
+  },
+  {
+    "slug": "our-new-video",
+    "title": "Our New Video",
+    "description": "Watch our latest video.",
+    "date": "2026-10-20",
+    "dateLabel": "20 October 2026",
+    "youtubeId": "SeRpOQ58yo8",
+    "start": 10,
+    "body": [
+      "Watch our latest video."
+    ]
   }
 ]
