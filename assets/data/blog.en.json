@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "why-philosophy-belongs-to-everyone",
+    "category": "essay",
+    "categoryLabel": "Essays",
+    "title": "Why Philosophy Belongs to Everyone",
+    "excerpt": "Philosophy has a reputation for being difficult and distant. It doesn't have to be.",
+    "author": "CSP Editors",
+    "image": "/assets/img/images/reading-circle.jpeg",
+    "body": [
+      "Ask someone what a philosopher looks like, and they'll probably describe a man in a toga, or a professor buried in books no one else can understand. That image keeps a lot of people out of a conversation that was never meant to be exclusive.",
+      "Philosophy started as something people did together, out loud, in public. Socrates didn't lecture from behind a desk — he asked questions in the market, of anyone willing to answer. The habit of examining an idea carefully, of asking \"why do we believe this?\", doesn't require a degree. It requires curiosity and a willingness to be wrong.",
+      "Most people already think philosophically without naming it. A parent working out how to be fair between two children is doing ethics. A commuter wondering whether a decision was really theirs to make, or shaped entirely by circumstance, is doing philosophy of mind. The questions are already there; what's missing is often just permission to take them seriously.",
+      "At CSP, we've built courses and discussions around that idea. No prior background is assumed. What matters is that you're willing to sit with a question longer than usual, and to hear out an answer you don't already agree with.",
+      "Philosophy belongs to everyone because the questions it asks — how should I live, what do I owe others, what can I actually know — belong to everyone too. Sri Lanka has never lacked people asking these questions. What it's lacked is more rooms to ask them in, out loud, together."
+    ],
+    "quote": "Philosophy belongs to everyone because the questions it asks belong to everyone too."
+  },
+  {
+    "slug": "what-do-we-owe-each-other",
+    "category": "essay",
+    "categoryLabel": "Essays",
+    "title": "What Do We Owe Each Other?",
+    "excerpt": "A short look at how we think about obligation, fairness, and care.",
+    "author": "CSP Editors",
+    "image": "/assets/img/images/panel-discussion.jpeg",
+    "body": [
+      "Someone cuts in line at the pharmacy. A stranger's bag falls open on a crowded bus and no one stops to help. A colleague takes credit for a shared idea. None of these moments involve breaking a law, yet something in them still feels wrong. That feeling is where ethics actually starts — not in abstract theory, but in the everyday sense that we owe each other something, even when no one is keeping score.",
+      "Philosophers have spent a long time trying to name what exactly that \"something\" is. Some argue it comes down to consequences: an act is right if it leads to more good than harm. Others argue duty matters more than outcome — that certain things are owed to people simply because they're people, regardless of what happens next. A third view starts from care: we owe more to those we're in relationship with, and our obligations grow out of those bonds rather than a universal rule.",
+      "None of these views fully settles the pharmacy queue or the fallen bag. But together they explain why the discomfort we feel in small moments is worth taking seriously. If we only ever ask \"did I break a rule?\", we miss most of what ethics is actually about — the ongoing, unglamorous work of noticing other people and adjusting our behaviour because they exist.",
+      "This is also where culture and philosophy meet. Sri Lankan traditions of hospitality, of looking out for neighbours, of extended family obligation, are already answers to the question \"what do we owe each other?\" — arrived at long before anyone wrote them into a philosophy textbook. Studying ethics formally doesn't replace that inheritance; it gives us a vocabulary for examining it, keeping what still serves us and questioning what doesn't.",
+      "The next time something small feels off — a queue, a bag, a shared idea gone uncredited — it's worth pausing on. That discomfort is ethics doing its job."
+    ],
+    "quote": "That discomfort is ethics doing its job."
+  },
+  {
+    "slug": "finding-meaning-in-ordinary-days",
+    "category": "essay",
+    "categoryLabel": "Essays",
+    "title": "Finding Meaning in Ordinary Days",
+    "excerpt": "You don't need a crisis to start asking philosophical questions.",
+    "author": "CSP Editors",
+    "image": "/assets/img/images/2023.jpeg",
+    "body": [
+      "Philosophy has a habit of showing up uninvited — usually during a crisis. A death, a diagnosis, a sudden loss of direction, and suddenly everyone is asking what actually matters. But treating philosophy as something reserved for emergencies misses most of what it's good for.",
+      "Most of life happens on ordinary days: making tea, commuting, replying to messages, doing the same job in the same way as yesterday. It's tempting to treat these hours as filler, waiting rooms between the moments that count. But that view assumes meaning has to announce itself loudly. It usually doesn't.",
+      "The Stoics wrote about this directly. Marcus Aurelius, writing privately to himself and not for an audience, kept returning to the same small discipline: pay attention to what's actually in front of you, do it well, and let that be enough. Not because ordinary tasks are secretly extraordinary, but because attention itself is where a good life is actually lived — not in some future moment once the \"real\" life starts.",
+      "You don't need a personal crisis to start asking what a day is for. A slow walk, a shared meal, a repeated task done with more care than it strictly requires — these are already philosophical acts, whether or not anyone calls them that. The question \"is this a good way to spend this hour?\" is available on a Tuesday just as much as after a life-changing event.",
+      "Finding meaning in ordinary days isn't about making every moment profound. It's about noticing that most of a life is made of ordinary moments, and deciding that's exactly where attention belongs."
+    ]
+  }
+]

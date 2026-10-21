@@ -216,4 +216,60 @@
     <lastmod>2026-10-20</lastmod>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://csp.lk/en/blog/index.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/index.html"/>
+    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/index.html"/>
+  </url>
+  <url>
+    <loc>https://csp.lk/si/blog/index.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/index.html"/>
+    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/index.html"/>
+  </url>
+  <url>
+    <loc>https://csp.lk/en/blog/post.html?slug=why-philosophy-belongs-to-everyone</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/post.html?slug=why-philosophy-belongs-to-everyone"/>
+    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/post.html?slug=why-philosophy-belongs-to-everyone"/>
+  </url>
+  <url>
+    <loc>https://csp.lk/si/blog/post.html?slug=why-philosophy-belongs-to-everyone</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/post.html?slug=why-philosophy-belongs-to-everyone"/>
+    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/post.html?slug=why-philosophy-belongs-to-everyone"/>
+  </url>
+  <url>
+    <loc>https://csp.lk/en/blog/post.html?slug=what-do-we-owe-each-other</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/post.html?slug=what-do-we-owe-each-other"/>
+    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/post.html?slug=what-do-we-owe-each-other"/>
+  </url>
+  <url>
+    <loc>https://csp.lk/si/blog/post.html?slug=what-do-we-owe-each-other</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/post.html?slug=what-do-we-owe-each-other"/>
+    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/post.html?slug=what-do-we-owe-each-other"/>
+  </url>
+  <url>
+    <loc>https://csp.lk/en/blog/post.html?slug=finding-meaning-in-ordinary-days</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/post.html?slug=finding-meaning-in-ordinary-days"/>
+    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/post.html?slug=finding-meaning-in-ordinary-days"/>
+  </url>
+  <url>
+    <loc>https://csp.lk/si/blog/post.html?slug=finding-meaning-in-ordinary-days</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://csp.lk/en/blog/post.html?slug=finding-meaning-in-ordinary-days"/>
+    <xhtml:link rel="alternate" hreflang="si" href="https://csp.lk/si/blog/post.html?slug=finding-meaning-in-ordinary-days"/>
+  </url>
 </urlset>

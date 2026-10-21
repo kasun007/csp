@@ -25,34 +25,37 @@
 {
   "@context": "https://schema.org",
   "@type": "SiteNavigationElement",
-  "name": ["මුල් පිටුව", "අප ගැන", "පාඨමාලා", "අපේ ප්‍රකාශන", "විශේෂාංග", "පරිත්‍යාග කරන්න", "සම්බන්ධ වන්න"],
+  "name": ["මුල් පිටුව", "අප ගැන", "පාඨමාලා", "අපේ ප්‍රකාශන", "විශේෂාංග", "බ්ලොගය", "පරිත්‍යාග කරන්න", "සම්බන්ධ වන්න"],
   "url": [
     "https://csp.lk/si/index.html",
     "https://csp.lk/si/about.html",
     "https://csp.lk/si/courses/index.html",
     "https://csp.lk/si/books/index.html",
     "https://csp.lk/si/highlights/index.html",
+    "https://csp.lk/si/blog/index.html",
     "https://csp.lk/si/donate.html",
     "https://csp.lk/si/contact.html"
   ]
 }
 </script>
 <header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="/si/index.html">
-      <img class="brand-logo" src="/assets/brand/logo-owl.jpg?v=2" alt="CSP">
-      <span class="brand-caption">කොළඹ දර්ශන ගුරුකුලය</span>
+  <div class="container site-header__inner">
+    <a class="site-header__brand" href="/si/index.html">
+      <img class="site-header__logo" src="/assets/brand/logo-owl.jpg?v=2" alt="CSP">
+      <span class="site-header__name">කොළඹ දර්ශන ගුරුකුලය<span class="site-header__name-si">Colombo School of Philosophy</span></span>
     </a>
-    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
-    <nav class="main-nav">
+    <button type="button" class="site-nav-toggle" aria-expanded="false" aria-controls="site-nav">මෙනුව</button>
+    <nav class="site-nav" id="site-nav">
       <a href="/si/index.html">මුල් පිටුව</a>
       <a href="/si/about.html">අප ගැන</a>
       <a href="/si/courses/index.html">පාඨමාලා</a>
       <a href="/si/books/index.html">අපේ ප්‍රකාශන</a>
       <a href="/si/highlights/index.html">විශේෂාංග</a>
+      <a href="/si/blog/index.html">බ්ලොගය</a>
       <a href="/si/donate.html">පරිත්‍යාග කරන්න</a>
       <a href="/si/contact.html">සම්බන්ධ වන්න</a>
       <a href="https://csp.lk/forum" target="_blank" rel="noopener noreferrer">සංසදය</a>
+      <a class="site-nav__cart" href="/si/books/index.html">පොත් මල්ල <span class="site-nav__cart-count" id="header-cart-count">0</span></a>
       <span class="locale-switcher">
         <a data-locale="en" href="#">EN</a>
         <a data-locale="si" href="#">SI</a>

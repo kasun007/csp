@@ -36,41 +36,82 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://csp.lk/en/index.html"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Donate",
-      "item": "https://csp.lk/en/donate.html"
-    }
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://csp.lk/en/index.html" },
+    { "@type": "ListItem", "position": 2, "name": "Donate", "item": "https://csp.lk/en/donate.html" }
   ]
 }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&family=Noto+Serif+Sinhala:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=38">
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=1">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=46">
 </head>
 <body>
   <div id="header-placeholder"></div>
 
   <main>
-    <section class="section">
-      <div class="container content-detail">
-        <h1>Donate</h1>
-        <p>Officially registered under the Societies Ordinance, the Colombo School of Philosophy is a non-profit organization working toward social progress. The financial contributions and support of donors are essential to successfully carry out the programmes run by our institute &mdash; study circles, publications, seminars, and educational video productions. If you would like to contribute toward strengthening this educational mission of ours, you can deposit your donation to the account below.</p>
+    <section class="page-hero container">
+      <span class="tag">Support CSP</span>
+      <h1>Donate</h1>
+      <p class="lead">Help us keep philosophy open and accessible in Sri Lanka.</p>
+    </section>
 
-        <p><strong>Account name:</strong> Colombo School of Philosophy<br><strong>Account number:</strong> 802743.8516<br><strong>Bank name:</strong> Commercial Bank, Kirulapone</p>
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="dark-panel" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: center;">
+          <div>
+            <span class="tag">Why it matters</span>
+            <h2>A non-profit, by design</h2>
+            <p>Officially registered under the Societies Ordinance, the Colombo School of Philosophy is a non-profit organization working toward social progress. The financial contributions and support of donors are essential to successfully carry out the programmes run by our institute &mdash; study circles, publications, seminars, and educational video productions. If you would like to contribute toward strengthening this educational mission of ours, you can deposit your donation to the account below.</p>
+          </div>
+          <div class="info-card info-card--on-dark">
+            <div class="info-card__panel">
+              <span class="info-card__label">Bank details</span>
+              <dl>
+                <dt>Account name</dt>
+                <dd>Colombo School of Philosophy</dd>
+                <dt>Account number</dt>
+                <dd>802743.8516</dd>
+                <dt>Bank name</dt>
+                <dd>Commercial Bank, Kirulapone</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-heading__text">
+            <span class="tag">Your gift</span>
+            <h2>What a gift funds</h2>
+          </div>
+        </div>
+        <ul class="feature-cards" style="margin-top: 0;">
+          <li class="feature-card">
+            <div class="feature-card__panel">
+              <span class="feature-card__label">Study circles</span>
+              <span class="feature-card__title">Weekly readings and discussion, kept free to join</span>
+            </div>
+          </li>
+          <li class="feature-card">
+            <div class="feature-card__panel">
+              <span class="feature-card__label">Publications</span>
+              <span class="feature-card__title">Printing and distributing books in Sinhala and English</span>
+            </div>
+          </li>
+          <li class="feature-card feature-card--accent">
+            <div class="feature-card__panel">
+              <span class="feature-card__label">Video &amp; media</span>
+              <span class="feature-card__title">Recording talks and lectures for anyone to watch</span>
+            </div>
+          </li>
+        </ul>
       </div>
     </section>
   </main>
 
   <div id="footer-placeholder"></div>
-  <script src="/assets/js/main.js?v=24"></script>
+  <script src="/assets/js/main.js?v=29"></script>
 </body>
 </html>

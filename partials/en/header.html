@@ -24,34 +24,37 @@
 {
   "@context": "https://schema.org",
   "@type": "SiteNavigationElement",
-  "name": ["Home", "About", "Courses", "Our Publications", "Features", "Donate", "Contact"],
+  "name": ["Home", "About", "Courses", "Our Publications", "Features", "Blog", "Donate", "Contact"],
   "url": [
     "https://csp.lk/en/index.html",
     "https://csp.lk/en/about.html",
     "https://csp.lk/en/courses/index.html",
     "https://csp.lk/en/books/index.html",
     "https://csp.lk/en/highlights/index.html",
+    "https://csp.lk/en/blog/index.html",
     "https://csp.lk/en/donate.html",
     "https://csp.lk/en/contact.html"
   ]
 }
 </script>
 <header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="/en/index.html">
-      <img class="brand-logo" src="/assets/brand/logo-owl.jpg?v=2" alt="CSP">
-      <span class="brand-caption">Colombo School of Philosophy</span>
+  <div class="container site-header__inner">
+    <a class="site-header__brand" href="/en/index.html">
+      <img class="site-header__logo" src="/assets/brand/logo-owl.jpg?v=2" alt="CSP">
+      <span class="site-header__name">Colombo School of Philosophy<span class="site-header__name-si">කොළඹ දර්ශන ගුරුකුලය</span></span>
     </a>
-    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
-    <nav class="main-nav">
+    <button type="button" class="site-nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav">
       <a href="/en/index.html">Home</a>
       <a href="/en/about.html">About</a>
       <a href="/en/courses/index.html">Courses</a>
       <a href="/en/books/index.html">Our Publications</a>
       <a href="/en/highlights/index.html">Features</a>
+      <a href="/en/blog/index.html">Blog</a>
       <a href="/en/donate.html">Donate</a>
       <a href="/en/contact.html">Contact</a>
       <a href="https://csp.lk/forum" target="_blank" rel="noopener noreferrer">Forum</a>
+      <a class="site-nav__cart" href="/en/books/index.html">Cart <span class="site-nav__cart-count" id="header-cart-count">0</span></a>
       <span class="locale-switcher">
         <a data-locale="en" href="#">EN</a>
         <a data-locale="si" href="#">SI</a>
