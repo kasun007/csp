@@ -1,1 +1,10 @@
 Options +FollowSymLinks
+
+# Indexed URLs (and all internal links/JSON-LD) point at .html, but pages are
+# now server-rendered PHP. Rewrite to the matching .php file whenever no real
+# .html file exists at that path (so static fragments like /partials/*.html
+# keep being served as-is).
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)\.html$ $1.php [L]

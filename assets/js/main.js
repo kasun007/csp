@@ -9,10 +9,7 @@
  */
 
 const LOCALES = ["en", "si"];
-const SITE_URL = "https://csp.lk";
-const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/brand/favicon-512.png?v=2`;
 const CART_WHATSAPP_NUMBER = "94712760993";
-const ENROL_WHATSAPP_NUMBER = "94710561317";
 const POSTAGE_PER_BOOK = 300;
 const CART_STORAGE_KEY = "csp-cart-v2";
 const CART_ADDRESS_KEY = "csp-cart-address-v2";
@@ -166,80 +163,6 @@ function wireLocaleSwitcher() {
   });
 }
 
-function upsertMetaTag(attr, key, content) {
-  let el = document.head.querySelector(`meta[${attr}="${key}"]`);
-  if (!el) {
-    el = document.createElement("meta");
-    el.setAttribute(attr, key);
-    document.head.appendChild(el);
-  }
-  el.setAttribute("content", content);
-}
-
-function upsertLinkTag(rel, href) {
-  let el = document.head.querySelector(`link[rel="${rel}"]`);
-  if (!el) {
-    el = document.createElement("link");
-    el.setAttribute("rel", rel);
-    document.head.appendChild(el);
-  }
-  el.setAttribute("href", href);
-}
-
-function setDynamicSeo({ title, description, path, image }) {
-  const url = `${SITE_URL}${path}`;
-  document.title = title;
-  upsertLinkTag("canonical", url);
-  upsertMetaTag("name", "description", description);
-  upsertMetaTag("property", "og:title", title);
-  upsertMetaTag("property", "og:description", description);
-  upsertMetaTag("property", "og:url", url);
-  upsertMetaTag("property", "og:image", image || DEFAULT_OG_IMAGE);
-  upsertMetaTag("name", "twitter:title", title);
-  upsertMetaTag("name", "twitter:description", description);
-  upsertMetaTag("name", "twitter:image", image || DEFAULT_OG_IMAGE);
-}
-
-function setJsonLd(id, data) {
-  const existing = document.getElementById(id);
-  if (existing) existing.remove();
-  const script = document.createElement("script");
-  script.type = "application/ld+json";
-  script.id = id;
-  script.textContent = JSON.stringify(data);
-  document.head.appendChild(script);
-}
-
-function setCourseStructuredData(course, locale) {
-  setJsonLd("course-structured-data", {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: course.title,
-    description: course.summary,
-    provider: { "@type": "EducationalOrganization", name: "Colombo School of Philosophy", sameAs: SITE_URL },
-    inLanguage: locale,
-    hasCourseInstance: {
-      "@type": "CourseInstance",
-      courseMode: course.format,
-      startDate: course.startDate,
-      location: { "@type": "Place", name: course.location },
-    },
-  });
-}
-
-function setBreadcrumbJsonLd(items) {
-  setJsonLd("breadcrumb-structured-data", {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: `${SITE_URL}${item.path}`,
-    })),
-  });
-}
-
 /* ================= FilterPills (generic) ================= */
 function initFilters(chips, list) {
   if (!chips || !list) return;
@@ -349,172 +272,7 @@ function initLightbox(root, box) {
   });
 }
 
-/* ================= Courses ================= */
-function factsListHTML(course, s) {
-  const facts = [
-    [s.duration, course.duration],
-    [s.format, course.format],
-    [s.starts, `${course.startDate} · ${course.startTime}`],
-    [s.location, course.location],
-  ];
-  if (course.instructor) facts.push([s.instructor, course.instructor]);
-  if (course.fee) facts.push([s.fee, course.fee]);
-  return `<ul class="facts-list">${facts.map(([label, value]) => `<li><strong>${label}:</strong> ${value}</li>`).join("")}</ul>`;
-}
-
-function courseAccordionHTML(course, locale) {
-  const s = strings();
-  const detailHref = `/${locale}/courses/course.html?slug=${encodeURIComponent(course.slug)}`;
-  return `
-    <details class="entry-accordion" data-category="${course.category}">
-      <summary class="entry-summary">
-        <span class="entry-row__meta">
-          <span class="entry-row__meta-label">${course.categoryLabel}</span>
-        </span>
-        <span>
-          <span class="entry-row__title">${course.title}</span>
-          <p class="entry-row__summary">${course.summary}</p>
-        </span>
-        <span class="entry-summary__toggle" aria-hidden="true"></span>
-      </summary>
-      <div class="entry-accordion-details">
-        <div class="entry-pills">
-          <span class="entry-pill">${course.duration}</span>
-          <span class="entry-pill">${course.format}</span>
-        </div>
-        ${course.image ? `<img class="entry-poster" src="${course.image}" alt="${course.title}">` : ""}
-        ${course.description.slice(0, 1).map((p) => `<p>${p}</p>`).join("")}
-        ${factsListHTML(course, s)}
-        <p>
-          <a class="text-link" href="${detailHref}">${s.viewFullPage}</a>
-        </p>
-      </div>
-    </details>`;
-}
-
-async function renderCourseList() {
-  const list = document.getElementById("course-list");
-  if (!list) return;
-  const locale = currentLocale();
-  const s = strings();
-
-  const res = await fetch(`/assets/data/courses.${locale}.json`, { cache: "no-store" });
-  if (!res.ok) return;
-  const courses = await res.json();
-
-  const filters = document.getElementById("course-filters");
-  if (filters) {
-    const seen = new Set();
-    const categories = [{ category: "all", label: s.filterAll }];
-    courses.forEach((course) => {
-      if (!seen.has(course.category)) {
-        seen.add(course.category);
-        categories.push({ category: course.category, label: course.categoryLabel });
-      }
-    });
-    filters.innerHTML = categories
-      .map((c, i) => `<button type="button" class="filter-pill" data-filter="${c.category}" aria-pressed="${i === 0}">${c.label}</button>`)
-      .join("");
-  }
-
-  list.innerHTML = courses.map((course) => courseAccordionHTML(course, locale)).join("");
-  initFilters(filters, list);
-}
-
-async function renderCourseDetail() {
-  const el = document.getElementById("course-detail");
-  if (!el) return;
-  const locale = currentLocale();
-  const s = strings();
-  const slug = new URLSearchParams(window.location.search).get("slug");
-  const backHref = `/${locale}/courses/index.html`;
-
-  const res = await fetch(`/assets/data/courses.${locale}.json`, { cache: "no-store" });
-  const courses = res.ok ? await res.json() : [];
-  const course = courses.find((c) => c.slug === slug);
-
-  if (!course) {
-    el.innerHTML = `<p>${s.notFound}</p><p><a href="${backHref}">${s.backToCourses}</a></p>`;
-    return;
-  }
-
-  setDynamicSeo({
-    title: `${course.title} — Colombo School of Philosophy`,
-    description: course.summary,
-    path: `/${locale}/courses/course.html?slug=${encodeURIComponent(course.slug)}`,
-    image: course.image ? `${SITE_URL}${course.image}` : undefined,
-  });
-  setCourseStructuredData(course, locale);
-  setBreadcrumbJsonLd([
-    { name: locale === "si" ? "මුල් පිටුව" : "Home", path: `/${locale}/index.html` },
-    { name: locale === "si" ? "පාඨමාලා" : "Courses", path: `/${locale}/courses/index.html` },
-    { name: course.title, path: `/${locale}/courses/course.html?slug=${encodeURIComponent(course.slug)}` },
-  ]);
-
-  const enrolMessage = encodeURIComponent(
-    locale === "si"
-      ? `ආයුබෝවන් CSP, මට "${course.title}" පාඨමාලාවට ලියාපදිංචි වීමට අවශ්‍යයි.`
-      : `Hi CSP, I'd like to enrol in "${course.title}".`
-  );
-
-  el.innerHTML = `
-    <div class="page-hero container">
-      <span class="tag">${course.categoryLabel}</span>
-      <h1>${course.title}</h1>
-      <p class="lead">${course.summary}</p>
-    </div>
-    <div class="container split-layout">
-      <div class="essay-body">
-        ${course.description.map((paragraph) => `<p>${paragraph}</p>`).join("")}
-      </div>
-      <div class="split-layout__sticky">
-        ${course.image ? `<div class="detail-photo"><img src="${course.image}" alt="${course.title}"></div>` : ""}
-        <div class="info-card">
-          <div class="info-card__panel">
-            ${factsListAsDlHTML(course, s)}
-          </div>
-        </div>
-        <p style="margin-top: var(--space-6);">
-          <a class="button" href="https://wa.me/${ENROL_WHATSAPP_NUMBER}?text=${enrolMessage}" target="_blank" rel="noopener noreferrer">${s.enrolWhatsapp}</a>
-        </p>
-        <p><a href="${course.mapUrl}" target="_blank" rel="noopener noreferrer" class="text-link">${s.viewOnMap}</a></p>
-      </div>
-    </div>
-    <div class="container"><p><a href="${backHref}">${s.backToCourses}</a></p></div>`;
-}
-
-function factsListAsDlHTML(course, s) {
-  const facts = [
-    [s.duration, course.duration],
-    [s.format, course.format],
-    [s.starts, `${course.startDate} · ${course.startTime}`],
-    [s.location, course.location],
-  ];
-  if (course.instructor) facts.push([s.instructor, course.instructor]);
-  if (course.fee) facts.push([s.fee, course.fee]);
-  return `<dl>${facts.map(([label, value]) => `<dt>${label}</dt><dd>${value}</dd>`).join("")}</dl>`;
-}
-
 /* ================= Books + Cart ================= */
-function bookCardHTML(book, locale) {
-  const s = strings();
-  return `
-    <div class="book-card" data-slug="${book.slug}">
-      <div class="book-card__panel">
-        <div class="book-cover">
-          ${book.image ? `<img src="${book.image}" alt="${book.title}">` : `<div class="badge-fallback">${book.title.charAt(0)}</div>`}
-        </div>
-        <h3>${book.title}</h3>
-        ${book.subtitle ? `<p class="book-subtitle">${book.subtitle}</p>` : ""}
-        <p class="meta">${book.author}</p>
-        <p class="book-price">${s.currency} ${Number(book.price).toLocaleString("en-LK")}</p>
-        <div class="book-card__add">
-          <button type="button" class="button button--small" data-add="${book.slug}">${s.addToCart}</button>
-        </div>
-      </div>
-    </div>`;
-}
-
 function getCart() {
   try {
     const raw = localStorage.getItem(CART_STORAGE_KEY);
@@ -709,102 +467,10 @@ async function renderBookList() {
   const list = document.getElementById("book-list");
   if (!list) return;
   const locale = currentLocale();
+  const books = window.CSP_BOOKS || [];
 
-  const res = await fetch(`/assets/data/books.${locale}.json`, { cache: "no-store" });
-  if (!res.ok) return;
-  const books = await res.json();
-
-  list.innerHTML = books.map((book) => bookCardHTML(book, locale)).join("");
   wireBookCart(list, books, locale);
   renderCartPanel(books, locale);
-}
-
-/* ================= Videos ================= */
-function videoThumbHTML(video) {
-  const href = `https://www.youtube.com/watch?v=${video.youtubeId}${video.start ? `&t=${video.start}s` : ""}`;
-  const thumb = `https://i.ytimg.com/vi/${video.youtubeId}/hqdefault.jpg`;
-  return `
-    <div class="video-card">
-      <h3>${video.title}</h3>
-      <a class="video-thumb" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="${video.title}">
-        <img src="${thumb}" alt="" loading="lazy">
-        <span class="video-thumb__play" aria-hidden="true"></span>
-      </a>
-    </div>`;
-}
-
-async function renderVideoList() {
-  const list = document.getElementById("video-list");
-  if (!list) return;
-  const locale = currentLocale();
-
-  const res = await fetch(`/assets/data/videos.${locale}.json`, { cache: "no-store" });
-  if (!res.ok) return;
-  const videos = await res.json();
-
-  list.innerHTML = videos.map((video) => videoThumbHTML(video)).join("");
-}
-
-/* ================= Highlights ================= */
-function sortHighlightsByDateDesc(items) {
-  return [...items].sort((a, b) => new Date(b.date) - new Date(a.date));
-}
-
-async function fetchHighlights(locale) {
-  const res = await fetch(`/assets/data/highlights.${locale}.json`, { cache: "no-store" });
-  if (!res.ok) return [];
-  return sortHighlightsByDateDesc(await res.json());
-}
-
-function highlightMediaHTML(item, className) {
-  if (item.youtubeId) {
-    const src = `https://www.youtube.com/embed/${item.youtubeId}${item.start ? `?start=${item.start}` : ""}`;
-    return `<div class="${className} ${className}--video"><iframe src="${src}" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" loading="lazy" allowfullscreen></iframe></div>`;
-  }
-  if (item.image) {
-    return `<div class="${className}"><img src="${item.image}" alt="${item.title}" loading="lazy"></div>`;
-  }
-  return `<div class="${className}"><div class="badge-fallback">${item.title.charAt(0)}</div></div>`;
-}
-
-function highlightCardHTML(item, locale, isLead) {
-  const s = strings();
-  const href = `/${locale}/highlights/highlight.html?slug=${encodeURIComponent(item.slug)}`;
-  return `
-    <a class="highlight-card${isLead ? " highlight-card--lead" : ""}" href="${href}">
-      <div class="highlight-card__panel">
-        ${highlightMediaHTML(item, "highlight-image")}
-        <div class="highlight-body">
-          <span class="highlight-date">${item.dateLabel || item.date}</span>
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-          <span class="text-link">${s.readMore}</span>
-        </div>
-      </div>
-    </a>`;
-}
-
-function highlightCarouselSlideHTML(item, locale) {
-  const s = strings();
-  const href = `/${locale}/highlights/highlight.html?slug=${encodeURIComponent(item.slug)}`;
-  return `
-    <article class="carousel__slide">
-      <div class="carousel__media">
-        ${
-          item.image
-            ? `<img src="${item.image}" alt="${item.title}">`
-            : item.youtubeId
-            ? `<img src="https://i.ytimg.com/vi/${item.youtubeId}/hqdefault.jpg" alt="${item.title}">`
-            : `<div class="badge-fallback">${item.title.charAt(0)}</div>`
-        }
-      </div>
-      <div>
-        <span class="tag">${item.dateLabel || item.date}</span>
-        <h3 class="carousel__title">${item.title}</h3>
-        <p>${item.description}</p>
-        <a class="text-link" href="${href}">${s.readMore}</a>
-      </div>
-    </article>`;
 }
 
 /* ================= Scroll-triggered box reveal ================= */
@@ -854,232 +520,10 @@ function wireReveals() {
   REVEAL_SELECTORS.forEach((selector) => wireReveal(selector));
 }
 
-async function renderHighlightsHome() {
-  const track = document.getElementById("highlights-home-list");
-  if (!track) return;
-  const locale = currentLocale();
-  const items = await fetchHighlights(locale);
-
-  track.innerHTML = items.map((item) => highlightCarouselSlideHTML(item, locale)).join("");
-  initCarousel(document.getElementById("highlights-carousel"));
-}
-
-async function renderHighlightsFull() {
-  const list = document.getElementById("highlights-full-list");
-  if (!list) return;
-  const locale = currentLocale();
-  const items = await fetchHighlights(locale);
-
-  list.innerHTML = items.map((item, index) => highlightCardHTML(item, locale, index === 0)).join("");
-}
-
-async function renderHighlightDetail() {
-  const el = document.getElementById("highlight-detail");
-  if (!el) return;
-  const locale = currentLocale();
-  const s = strings();
-  const slug = new URLSearchParams(window.location.search).get("slug");
-  const backHref = `/${locale}/highlights/index.html`;
-
-  const items = await fetchHighlights(locale);
-  const item = items.find((h) => h.slug === slug);
-
-  if (!item) {
-    el.innerHTML = `<p>${s.highlightsNotFound}</p><p><a href="${backHref}">${s.highlightsBack}</a></p>`;
-    return;
-  }
-
-  setDynamicSeo({
-    title: `${item.title} — Colombo School of Philosophy`,
-    description: item.description,
-    path: `/${locale}/highlights/highlight.html?slug=${encodeURIComponent(item.slug)}`,
-    image: item.image ? `${SITE_URL}${item.image}` : undefined,
-  });
-  setBreadcrumbJsonLd([
-    { name: locale === "si" ? "මුල් පිටුව" : "Home", path: `/${locale}/index.html` },
-    { name: locale === "si" ? "විශේෂාංග" : "Features", path: `/${locale}/highlights/index.html` },
-    { name: item.title, path: `/${locale}/highlights/highlight.html?slug=${encodeURIComponent(item.slug)}` },
-  ]);
-
-  const galleryItems = item.gallery
-    ? item.gallery
-        .map(
-          (src, i) =>
-            `<img data-lightbox-src="${src}" data-lightbox-alt="${item.title}" data-lightbox-title="${item.title}" src="${src}" alt="${item.title}" loading="lazy">`
-        )
-        .join("")
-    : "";
-
-  el.innerHTML = `
-    ${highlightMediaHTML(item, "detail-photo")}
-    <h1>${item.title}</h1>
-    <p class="meta">${item.dateLabel || item.date}</p>
-    ${item.body.map((paragraph) => `<p>${paragraph}</p>`).join("")}
-    ${galleryItems ? `<div class="highlight-gallery">${galleryItems}</div>` : ""}
-    ${item.externalUrl ? `<p><a href="${item.externalUrl}" target="_blank" rel="noopener noreferrer">${s.highlightsExternalLink}</a></p>` : ""}
-    <p><a href="${backHref}">${s.highlightsBack}</a></p>`;
-
-  if (item.gallery) {
-    initLightbox(el, document.getElementById("lightbox"));
-  }
-}
-
-/* ================= Timeline ================= */
-function timelineItemHTML(item, index) {
-  if (item.closing) {
-    return `
-      <li class="timeline-item timeline-item--closing">
-        <div class="timeline-content">
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-        </div>
-      </li>`;
-  }
-  return `
-    <li class="timeline-item">
-      <span class="timeline-year">${item.year}</span>
-      <div class="timeline-content">
-        <h3>${item.title}</h3>
-        <p>${item.description}</p>
-      </div>
-      ${
-        item.image
-          ? `<button type="button" class="timeline-image-btn" data-lightbox-src="${item.image}" data-lightbox-alt="${item.title}" data-lightbox-year="${item.year}" data-lightbox-title="${item.title}" data-lightbox-caption="${item.description}">
-              <img src="${item.image}" alt="${item.title}" loading="lazy">
-            </button>`
-          : ""
-      }
-    </li>`;
-}
-
-async function renderTimeline() {
-  const list = document.getElementById("timeline-list");
-  if (!list) return;
-  const locale = currentLocale();
-
-  const res = await fetch(`/assets/data/timeline.${locale}.json`, { cache: "no-store" });
-  if (!res.ok) return;
-  const items = await res.json();
-
-  list.innerHTML = items.map((item, index) => timelineItemHTML(item, index)).join("");
-  initLightbox(list, document.getElementById("lightbox"));
-}
-
-/* ================= Blog ================= */
-function wordsCount(body) {
-  return body.join(" ").split(/\s+/).filter(Boolean).length;
-}
-
-function readingTime(body) {
-  return Math.max(1, Math.ceil(wordsCount(body) / 180));
-}
-
-function blogCardHTML(post, locale, isLead) {
-  const s = strings();
-  const href = `/${locale}/blog/post.html?slug=${encodeURIComponent(post.slug)}`;
-  return `
-    <a class="blog-card${isLead ? " blog-card--lead" : ""}" href="${href}" data-category="${post.category}">
-      <div class="blog-card__panel">
-        <div class="blog-card__photo">
-          ${post.image ? `<img src="${post.image}" alt="${post.title}">` : `<div class="badge-fallback">${post.title.charAt(0)}</div>`}
-        </div>
-        <div>
-          <div class="blog-card__meta">
-            <span class="blog-card__category">${post.categoryLabel || post.category}</span>
-            <span>${s.readingTime(readingTime(post.body))}</span>
-          </div>
-          <h3 class="blog-card__title">${post.title}</h3>
-          <p class="blog-card__excerpt">${post.excerpt}</p>
-          <span class="text-link">${s.blogReadArticle}</span>
-        </div>
-      </div>
-    </a>`;
-}
-
-async function fetchBlogPosts(locale) {
-  const res = await fetch(`/assets/data/blog.${locale}.json`, { cache: "no-store" });
-  if (!res.ok) return [];
-  return res.json();
-}
-
-async function renderBlogList() {
-  const list = document.getElementById("blog-list");
-  if (!list) return;
-  const locale = currentLocale();
-  const s = strings();
-  const posts = await fetchBlogPosts(locale);
-
-  const filters = document.getElementById("blog-filters");
-  if (filters) {
-    const seen = new Set();
-    const categories = [{ category: "all", label: s.filterAll }];
-    posts.forEach((post) => {
-      if (!seen.has(post.category)) {
-        seen.add(post.category);
-        categories.push({ category: post.category, label: post.categoryLabel || post.category });
-      }
-    });
-    filters.innerHTML = categories
-      .map((c, i) => `<button type="button" class="filter-pill" data-filter="${c.category}" aria-pressed="${i === 0}">${c.label}</button>`)
-      .join("");
-  }
-
-  list.innerHTML = posts.map((post, index) => blogCardHTML(post, locale, index === 0)).join("");
-  initFilters(filters, list);
-}
-
-async function renderBlogPost() {
-  const el = document.getElementById("blog-post");
-  if (!el) return;
-  const locale = currentLocale();
-  const s = strings();
-  const slug = new URLSearchParams(window.location.search).get("slug");
-  const backHref = `/${locale}/blog/index.html`;
-
-  const posts = await fetchBlogPosts(locale);
-  const index = posts.findIndex((p) => p.slug === slug);
-  const post = posts[index];
-
-  if (!post) {
-    el.innerHTML = `<p>${s.blogNotFound}</p><p><a href="${backHref}">${s.blogBack}</a></p>`;
-    return;
-  }
-
-  setDynamicSeo({
-    title: `${post.title} — Colombo School of Philosophy`,
-    description: post.excerpt,
-    path: `/${locale}/blog/post.html?slug=${encodeURIComponent(post.slug)}`,
-    image: post.image ? `${SITE_URL}${post.image}` : undefined,
-  });
-  setBreadcrumbJsonLd([
-    { name: locale === "si" ? "මුල් පිටුව" : "Home", path: `/${locale}/index.html` },
-    { name: locale === "si" ? "බ්ලොගය" : "Blog", path: `/${locale}/blog/index.html` },
-    { name: post.title, path: `/${locale}/blog/post.html?slug=${encodeURIComponent(post.slug)}` },
-  ]);
-
-  const next = posts[(index + 1) % posts.length];
-  const nextHref = `/${locale}/blog/post.html?slug=${encodeURIComponent(next.slug)}`;
-
-  el.innerHTML = `
-    <div class="container">
-      <p><a class="text-link" href="${backHref}">${s.blogBack}</a></p>
-      <header class="article-header">
-        <span class="blog-card__category">${post.categoryLabel || post.category}</span>
-        <h1>${post.title}</h1>
-        <div class="article-header__meta">
-          <span>${post.author}</span>
-          <span>${s.readingTime(readingTime(post.body))}</span>
-        </div>
-      </header>
-      ${post.image ? `<div class="article-photo"><img src="${post.image}" alt="${post.title}"></div>` : ""}
-      <div class="article-body">
-        ${post.body.map((paragraph) => `<p>${paragraph}</p>`).join("")}
-        ${post.quote ? `<blockquote>${post.quote}</blockquote>` : ""}
-      </div>
-      <div class="article-next">
-        <a class="text-link" href="${nextHref}">${s.blogNextArticle}: ${next.title}</a>
-      </div>
-    </div>`;
+function renderHighlightsHome() {
+  const root = document.getElementById("highlights-carousel");
+  if (!root) return;
+  initCarousel(root);
 }
 
 /* ================= Typewriter (grapheme-safe) ================= */
@@ -1153,144 +597,25 @@ function wireTypewriter(el, segments, { speed = 55 } = {}) {
   tick();
 }
 
+/** Builds wireTypewriter segments from the server-rendered .type-output markup itself. */
+function segmentsFromMarkup(el) {
+  const output = el.querySelector(".type-output");
+  if (!output) return [];
+  return Array.from(output.childNodes).map((node) => {
+    if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "EM") {
+      return { text: node.textContent, highlight: true };
+    }
+    return { text: node.textContent };
+  });
+}
+
 function renderHomeHeroTypewriter() {
-  const siEl = document.getElementById("hero-typewriter-si");
-  if (siEl) {
-    wireTypewriter(siEl, [
-      { text: "දර්ශනය ගැන දැන ගැනීම වෙනුවට" },
-      { break: true },
-      { text: " දර්ශනය " },
-      { text: "ව්‍යවහාර", highlight: true },
-      { text: " කිරීම." },
-    ]);
-  }
-
-  const enEl = document.getElementById("hero-typewriter-en");
-  if (enEl) {
-    wireTypewriter(enEl, [
-      { text: "What does it mean to live " },
-      { text: "philosophically", highlight: true },
-      { text: "?" },
-    ]);
-  }
-}
-
-/* ================= Home page assembly ================= */
-async function renderHomeFeatureCards() {
-  const mount = document.getElementById("home-feature-cards");
-  if (!mount) return;
-  const locale = currentLocale();
-  const s = strings();
-  const isSi = locale === "si";
-
-  const [coursesRes, booksRes] = await Promise.all([
-    fetch(`/assets/data/courses.${locale}.json`, { cache: "no-store" }),
-    fetch(`/assets/data/books.${locale}.json`, { cache: "no-store" }),
-  ]);
-  const courses = coursesRes.ok ? await coursesRes.json() : [];
-  const books = booksRes.ok ? await booksRes.json() : [];
-  const openCourse = courses.find((c) => c.category === "open") || courses[0];
-  const newestBook = books[0];
-
-  const cards = [];
-  if (openCourse) {
-    cards.push({
-      href: `/${locale}/courses/course.html?slug=${encodeURIComponent(openCourse.slug)}`,
-      label: isSi ? "දැන් ලියාපදිංචි විය හැක" : "Now open",
-      title: openCourse.title,
-    });
-  }
-  if (newestBook) {
-    cards.push({
-      href: `/${locale}/books/index.html`,
-      label: isSi ? "නවතම ප්‍රකාශනය" : "Newest publication",
-      title: newestBook.title,
-    });
-  }
-  cards.push({
-    href: `/${locale}/about.html`,
-    label: isSi ? "2012 සිට" : "Since 2012",
-    title: isSi ? "දශකයකට වැඩි කාලයක් කොළඹ දර්ශනය" : "A decade of philosophy in Colombo",
-    accent: true,
+  ["en", "si"].forEach((locale) => {
+    const el = document.getElementById(`hero-typewriter-${locale}`);
+    if (!el) return;
+    const segments = segmentsFromMarkup(el);
+    if (segments.length) wireTypewriter(el, segments);
   });
-
-  mount.innerHTML = cards
-    .map(
-      (card, i) => `
-    <li class="feature-card${card.accent ? " feature-card--accent" : ""}">
-      <a href="${card.href}" class="feature-card__panel" style="display: block; text-decoration: none;">
-        <span class="feature-card__label">${card.label}</span>
-        <span class="feature-card__title">${card.title}</span>
-      </a>
-    </li>`
-    )
-    .join("");
-}
-
-async function renderHomeTopics() {
-  const mount = document.getElementById("home-topics");
-  if (!mount) return;
-  const locale = currentLocale();
-  const isSi = locale === "si";
-
-  const res = await fetch(`/assets/data/courses.${locale}.json`, { cache: "no-store" });
-  const courses = res.ok ? await res.json() : [];
-  const topicCourses = courses.slice(0, 2);
-
-  const topics = topicCourses.map((course) => ({
-    href: `/${locale}/courses/course.html?slug=${encodeURIComponent(course.slug)}`,
-    image: course.image,
-    title: course.title,
-    sub: course.duration,
-  }));
-  topics.push({
-    href: `/${locale}/books/index.html`,
-    image: "/assets/img/books/collection.jpeg",
-    title: isSi ? "අපේ ප්‍රකාශන" : "Our Publications",
-    sub: isSi ? "පොත් මිලදී ගන්න" : "Browse the books",
-  });
-  topics.push({
-    href: `/${locale}/highlights/index.html`,
-    image: "/assets/img/images/2026.jpeg",
-    title: isSi ? "විශේෂාංග" : "Features",
-    sub: isSi ? "නවතම ක්‍රියාකාරකම්" : "Latest activity",
-  });
-
-  mount.innerHTML = `<ul class="topic-grid">${topics
-    .map(
-      (topic) => `
-    <li>
-      <a class="topic-card" href="${topic.href}">
-        <span class="topic-card__media"><img src="${topic.image}" alt=""></span>
-        <span class="topic-card__body">
-          <span class="topic-card__title">${topic.title}</span>
-          <span class="topic-card__sub">${topic.sub}</span>
-        </span>
-      </a>
-    </li>`
-    )
-    .join("")}</ul>`;
-}
-
-async function renderHomeBlogTeaser() {
-  const mount = document.getElementById("home-blog-teaser");
-  if (!mount) return;
-  const locale = currentLocale();
-  const posts = (await fetchBlogPosts(locale)).slice(0, 3);
-  mount.innerHTML = `<div class="blog-grid">${posts.map((post) => blogCardHTML(post, locale, false)).join("")}</div>`;
-}
-
-async function renderHomeBookTeaser() {
-  const mount = document.getElementById("home-book-teaser");
-  if (!mount) return;
-  const locale = currentLocale();
-  const res = await fetch(`/assets/data/books.${locale}.json`, { cache: "no-store" });
-  const books = res.ok ? await res.json() : [];
-  mount.innerHTML = `<div class="book-grid">${books
-    .slice(0, 4)
-    .map((book) => bookCardHTML(book, locale))
-    .join("")}</div>`;
-  wireBookCart(mount, books, locale);
 }
 
 /* ================= Visitor counter ================= */
@@ -1321,22 +646,12 @@ async function init() {
   markCurrentNav(window.CSP_NAV_EXTRA_MATCHES);
   updateHeaderCartCount();
   renderVisitorCounter();
-  await renderCourseList();
-  await renderCourseDetail();
   await renderBookList();
-  await renderVideoList();
-  await renderHighlightsHome();
-  await renderHighlightsFull();
-  await renderHighlightDetail();
-  await renderTimeline();
-  await renderBlogList();
-  await renderBlogPost();
-  await renderHomeFeatureCards();
-  await renderHomeTopics();
-  await renderHomeBlogTeaser();
-  await renderHomeBookTeaser();
+  renderHighlightsHome();
   renderHomeHeroTypewriter();
   wireReveals();
+  initFilters(document.getElementById("blog-filters"), document.getElementById("blog-list"));
+  initFilters(document.getElementById("course-filters"), document.getElementById("course-list"));
 }
 
 window.CSP = { initFilters, initCarousel, initLightbox };
