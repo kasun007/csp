@@ -1448,9 +1448,6 @@ h2 em.hl {
 
 .blog-card--lead {
   grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
   padding: 0.5rem;
 }
 
