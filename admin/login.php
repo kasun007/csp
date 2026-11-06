@@ -13,9 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
 
+    $remember = isset($_POST['remember']);
+
     if ($username === '' || $password === '') {
         $error = 'Enter both a username and password.';
-    } elseif (Auth::attempt($username, $password)) {
+    } elseif (Auth::attempt($username, $password, $remember)) {
         header('Location: index.php');
         exit;
     } else {
@@ -46,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="field">
         <label for="password">Password</label>
         <input type="password" id="password" name="password" autocomplete="current-password" required>
+      </div>
+      <div class="field field--checkbox">
+        <label for="remember"><input type="checkbox" id="remember" name="remember"> Remember me on this device</label>
       </div>
       <button type="submit" class="btn" style="width:100%;">Sign in</button>
     </form>

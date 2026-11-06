@@ -189,6 +189,19 @@ code {
   margin-top: 0.25rem;
 }
 
+.field--checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.field--checkbox input[type="checkbox"] {
+  width: auto;
+}
+
 .field-row {
   display: flex;
   gap: 1rem;
