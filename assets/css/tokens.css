@@ -129,9 +129,9 @@
   /* Shadow */
   --shadow-float: 1px 3px 10px rgba(0, 0, 0, 0.2);
 
-  /* Filters */
-  --filter-photo: grayscale(1) contrast(1.1);
-  --filter-banner: grayscale(1) contrast(1.1) brightness(0.45);
+  /* Filters — stark, high-contrast monochrome photography */
+  --filter-photo: grayscale(1) contrast(1.35) brightness(0.94);
+  --filter-banner: grayscale(1) contrast(1.3) brightness(0.3);
 
   /* Layout */
   --layout-max: 77.5rem;
